@@ -1,9 +1,14 @@
+import Container from "@/components/views/Container";
+import Layout from "@/components/views/Layout";
+
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-4xl font-bold mb-4">
-        Welcome to Next.js with Tailwind CSS!
-      </h1>
-    </div>
+    <Layout>
+      <section className="py-12">
+        <Container>
+          <h1>hello</h1>
+        </Container>
+      </section>
+    </Layout>
   );
 }
