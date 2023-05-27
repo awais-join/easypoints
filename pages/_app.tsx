@@ -1,16 +1,26 @@
-import { Provider } from "react-redux";
+import {Provider} from 'react-redux';
+import {store} from '@/store';
+import '../styles/globals.scss';
+import type {AppProps} from 'next/app';
+import {DefaultSeo} from 'next-seo';
+import {metaConstants} from '@/meta-constants';
 
-import { store } from "../store";
-
-import "../styles/globals.css";
-
-import type { AppProps } from "next/app";
-
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({Component, pageProps}: AppProps) {
   return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
+    <>
+      <DefaultSeo
+        openGraph={{
+          type: 'website',
+          locale: 'en_us',
+          url: 'https://easypoints.com',
+          site_name: metaConstants.SITE_NAME
+        }}
+        title={metaConstants.SITE_NAME}
+      />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+    </>
   );
 }
 
