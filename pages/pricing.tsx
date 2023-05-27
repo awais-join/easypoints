@@ -4,6 +4,8 @@ import {PricingSectionComponent} from '@/components/pricing/pricing-section.comp
 import {Pricing} from '@/components/pricing/pricing-card.component';
 import Image from 'next/image';
 import Container from '@/components/views/Container';
+import {metaConstants} from '@/meta-constants';
+import {NextSeo} from 'next-seo';
 
 const ALL_PRICING_SELF_SERVE: Pricing[] = [
   {
@@ -120,92 +122,98 @@ const ADDITIONAL_SERVICES: ReadonlyArray<AdditionalServices> = [
 
 const Pricing: NextPage = () => {
   return (
-    <Container paddingZero>
-      <PricingSectionComponent
-        headerSubText="Self-Serve"
-        headerText="Eastpoints"
-        tagline="Find your better flights for less."
-        pricingLists={ALL_PRICING_SELF_SERVE}
-        pricingLength={ALL_PRICING_SELF_SERVE.length}
-      >
-        <p className="text-text text-xs mt-10">
-          Unlimited search is for personal use, and is subject to fair use
-          policies. point.me reserves the right to limit or otherwise constrain
-          searches in case of excessive use.
-        </p>
-      </PricingSectionComponent>
-      <PricingSectionComponent
-        pricingLength={ALL_PRICING_CONCIERGE.length}
-        headerSubText="Conceirge"
-        headerText="Eastpoints"
-        tagline="Let us book for you."
-        pricingLists={ALL_PRICING_CONCIERGE}
-      >
-        <div className="bg-white p-8 rounded-3xl mt-10">
-          <div className="text-xl text-black font-bold rounded-2xl bg-darkBlue p-4 mb-6">
-            Additional Services
-          </div>
-          <div className="bg-white mt-2">
-            {ADDITIONAL_SERVICES.map((value, index) => {
-              return (
-                <div key={value.arrayKey} className="flex flex-row w-full my-4">
-                  <div className="w-1/5 flex flex-row justify-between">
-                    <p
-                      className="text-sm text-[#2B2F30]"
-                      dangerouslySetInnerHTML={{__html: value.key}}
-                    />
-                    <div className="border-r-2 border-[#E6EDF2] mr-2" />
-                  </div>
-                  <div className="w-4/5 text-sm text-text">{value.value}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </PricingSectionComponent>
-      <div className="flex justify-center">
-        <div
-          className="flex flex-row justify-between w-5/6 mt-4"
-          style={{maxHeight: '1000px', minHeight: 'fit-content'}}
+    <>
+      <NextSeo title={`Pricing | ${metaConstants.SITE_NAME}`} />
+      <Container paddingZero>
+        <PricingSectionComponent
+          headerSubText="Self-Serve"
+          headerText="Eastpoints"
+          tagline="Find your better flights for less."
+          pricingLists={ALL_PRICING_SELF_SERVE}
+          pricingLength={ALL_PRICING_SELF_SERVE.length}
         >
-          <div className="w-1/2 h-full relative">
-            <Image
-              className="object-cover rounded-[2rem]"
-              src="/assets/img.jpg"
-              alt="woman on beach"
-              fill
-            />
+          <p className="text-text text-xs mt-10">
+            Unlimited search is for personal use, and is subject to fair use
+            policies. point.me reserves the right to limit or otherwise
+            constrain searches in case of excessive use.
+          </p>
+        </PricingSectionComponent>
+        <PricingSectionComponent
+          pricingLength={ALL_PRICING_CONCIERGE.length}
+          headerSubText="Conceirge"
+          headerText="Eastpoints"
+          tagline="Let us book for you."
+          pricingLists={ALL_PRICING_CONCIERGE}
+        >
+          <div className="bg-white p-8 rounded-3xl mt-10">
+            <div className="text-xl text-black font-bold rounded-2xl bg-darkBlue p-4 mb-6">
+              Additional Services
+            </div>
+            <div className="bg-white mt-2">
+              {ADDITIONAL_SERVICES.map((value, index) => {
+                return (
+                  <div
+                    key={value.arrayKey}
+                    className="flex flex-row w-full my-4"
+                  >
+                    <div className="w-1/5 flex flex-row justify-between">
+                      <p
+                        className="text-sm text-[#2B2F30]"
+                        dangerouslySetInnerHTML={{__html: value.key}}
+                      />
+                      <div className="border-r-2 border-[#E6EDF2] mr-2" />
+                    </div>
+                    <div className="w-4/5 text-sm text-text">{value.value}</div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <div className="w-1/2 h-500 bg-lightBlue rounded-[2rem] ml-6 p-10">
-            <p className="text-5xl font-bold text-black">
-              Why does easypoints cost money?
-            </p>
-            <br />
-            <p className="text-sm text-text">
-              Here at point.me we’re devoted to bringing simplicity and clarity
-              to a system that is intentionally opaque. And unlike traditional
-              travel agencies, or even online booking services like Orbitz,
-              Kayak, & Google, we don’t take a fee or commission from the
-              airlines when you book a flight.
-            </p>
-            <br />
-            <p className="text-sm text-text">
-              Here at point.me we’re devoted to bringing simplicity and clarity
-              to a system that is intentionally opaque. And unlike traditional
-              travel agencies, or even online booking services like Orbitz,
-              Kayak, & Google, we don’t take a fee or commission from the
-              airlines when you book a flight.
-            </p>
-            <br />
-            <p className="text-sm text-text">
-              Instead, point.me is on your side — we work directly for you.
-              We’re an ally that uses our expertise and technology to ensure you
-              travel better, and are never taken advantage of.
-            </p>
+        </PricingSectionComponent>
+        <div className="flex justify-center">
+          <div
+            className="flex flex-row justify-between w-5/6 mt-4"
+            style={{maxHeight: '1000px', minHeight: 'fit-content'}}
+          >
+            <div className="w-1/2 h-full relative">
+              <Image
+                className="object-cover rounded-[2rem]"
+                src="/assets/img.jpg"
+                alt="woman on beach"
+                fill
+              />
+            </div>
+            <div className="w-1/2 h-500 bg-lightBlue rounded-[2rem] ml-6 p-10">
+              <p className="text-5xl font-bold text-black">
+                Why does easypoints cost money?
+              </p>
+              <br />
+              <p className="text-sm text-text">
+                Here at point.me we’re devoted to bringing simplicity and
+                clarity to a system that is intentionally opaque. And unlike
+                traditional travel agencies, or even online booking services
+                like Orbitz, Kayak, & Google, we don’t take a fee or commission
+                from the airlines when you book a flight.
+              </p>
+              <br />
+              <p className="text-sm text-text">
+                Here at point.me we’re devoted to bringing simplicity and
+                clarity to a system that is intentionally opaque. And unlike
+                traditional travel agencies, or even online booking services
+                like Orbitz, Kayak, & Google, we don’t take a fee or commission
+                from the airlines when you book a flight.
+              </p>
+              <br />
+              <p className="text-sm text-text">
+                Instead, point.me is on your side — we work directly for you.
+                We’re an ally that uses our expertise and technology to ensure
+                you travel better, and are never taken advantage of.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 };
 
