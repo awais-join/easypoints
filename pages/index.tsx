@@ -1,11 +1,11 @@
 import React from "react";
 import { NextPage } from "next";
 
-import FlightPriceSection from "@/components/sections/FlightPriceSection";
-import HeroSection from "@/components/sections/HeroSection";
+import FlightPriceSection from "@/components/home/FlightPriceSection";
+import HeroSection from "@/components/home/HeroSection";
 import Layout from "@/components/views/Layout";
-import SameFlightSection from "@/components/sections/SameFlightSection";
-import EasyToBookSection from "@/components/sections/EasyToBookSection";
+import SameFlightSection from "@/components/home/SameFlightSection";
+import EasyToBookSection from "@/components/home/EasyToBookSection";
 
 const Home: NextPage = () => {
   return (
