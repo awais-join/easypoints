@@ -29,7 +29,7 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-light">
+    <header className="bg-light rounded-t-3xl m-3 mb-0">
       <Container>
         <nav className="w-full flex items-center justify-between py-4">
           <Link href="/" className="-m-1.5 p-1.5">
@@ -93,13 +93,13 @@ const Navbar = () => {
             <div className="flex gap-4">
               <Link
                 href="/sign-up"
-                className="rounded-full bg-primary-500 px-6 py-4 text-base font-bold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+                className="rounded-full bg-primary-500 px-8 py-4 text-base font-bold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
               >
                 Sign up
               </Link>
               <Link
                 href="/sign-in"
-                className="rounded-full bg-light px-6 py-4 text-base font-bold text-primary-500 border border-primary-500 shadow-sm hover:bg-primary-600 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+                className="rounded-full bg-light px-8 py-4 text-base font-bold text-primary-500 border border-primary-500 shadow-sm hover:bg-primary-600 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
               >
                 Login
               </Link>
@@ -179,13 +179,13 @@ const Navbar = () => {
               <div className="pb-6 flex gap-4">
                 <Link
                   href="/sign-up"
-                  className="rounded-full bg-primary-500 px-6 py-4 text-base font-bold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+                  className="rounded-full bg-primary-500 px-8 py-4 text-base font-bold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
                 >
                   Sign up
                 </Link>
                 <Link
                   href="/sign-in"
-                  className="rounded-full bg-light px-6 py-4 text-base font-bold text-primary-500 border border-primary-500 shadow-sm hover:bg-primary-600 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+                  className="rounded-full bg-light px-8 py-4 text-base font-bold text-primary-500 border border-primary-500 shadow-sm hover:bg-primary-600 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
                 >
                   Login
                 </Link>

@@ -10,7 +10,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <main className="flex flex-col min-h-screen scroll-smooth">
       <Navbar />
-      <div className={`flex-1 bg-light`}>{children}</div>
+      <div className={`flex-1 bg-white text-black`}>{children}</div>
       <Footer />
     </main>
   );

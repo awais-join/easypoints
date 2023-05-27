@@ -120,13 +120,8 @@ const Footer = () => {
           <div className="xl:col-span-1 border-b xl:border-b-0 xl:border-r border-borderLight md:pt-12 pb-12 xl:pr-12">
             <div className="space-y-6">
               <Link href="/" className="block">
-                <span className="block w-52 h-16 relative">
-                  <Image fill src="/assets/dark-logo.png" alt="dark-logo" />
-                  {/* <img
-                    className="d-block h-full w-full"
-                    src="/assets/dark-logo.png"
-                    alt="dark-logo"
-                  /> */}
+                <span className="block w-40 h-14 relative">
+                  <Image fill src="/assets/logo-2.png" alt="dark-logo" />
                 </span>
               </Link>
               <p className="text-lg leading-9">

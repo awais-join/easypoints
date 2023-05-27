@@ -12,8 +12,10 @@ module.exports = {
       },
       colors: {
         black: "#09051A",
+        black75: "#434749",
         black50: "#808080",
         light: "#F6F9FF",
+        lightGray: "#E6E6E6",
         borderLight: "#ffffff33",
         primary: {
           DEFAULT: "#048EFF",
@@ -28,6 +30,13 @@ module.exports = {
           800: "#00325B",
           900: "#030221",
         },
+      },
+      boxShadow: {
+        primary:
+          "0px 14.9572px 22.4358px -4.48716px rgba(0, 0, 0, 0.1), 0px 5.98288px 8.97432px -5.98288px rgba(0, 0, 0, 0.1)",
+      },
+      borderRadius: {
+        "4xl": "2.5rem",
       },
     },
   },
