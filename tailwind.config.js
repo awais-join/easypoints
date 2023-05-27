@@ -30,6 +30,9 @@ module.exports = {
           800: "#00325B",
           900: "#030221",
         },
+        lightBlue: '#F6F9FF',
+        darkBlue: '#E1E8F5',
+        text: '#434749'
       },
       boxShadow: {
         primary:
