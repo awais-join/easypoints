@@ -126,6 +126,7 @@ const Pricing: NextPage = () => {
       <NextSeo title={`Pricing | ${metaConstants.SITE_NAME}`} />
       <Container paddingZero>
         <PricingSectionComponent
+          key="allSelfServe"
           headerSubText="Self-Serve"
           headerText="Eastpoints"
           tagline="Find your better flights for less."
@@ -139,6 +140,7 @@ const Pricing: NextPage = () => {
           </p>
         </PricingSectionComponent>
         <PricingSectionComponent
+          key="concerige"
           pricingLength={ALL_PRICING_CONCIERGE.length}
           headerSubText="Conceirge"
           headerText="Eastpoints"
