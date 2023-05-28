@@ -120,7 +120,7 @@ const Faqs: NextPage = () => {
   return (
     <>
       <Layout>
-        <div className="max-w-full mx-3 p-6 bg-light rounded-4xl">
+        <div className="max-w-full mx-3 p-6 bg-light rounded-b-3xl">
           <section className="py-20">
             <Container>
               <div className="mx-auto max-w-5xl">
@@ -138,8 +138,8 @@ const Faqs: NextPage = () => {
           </section>
         </div>
         {!displayfaqs && (
-          <div className="max-w-7xl mx-3 xl:mx-auto p-6 lg:p-12 mt-12 mb-4">
-            <div className="mx-auto max-w-4xl">
+          <div className="max-w-full mx-3 xl:mx-auto p-6 lg:p-12 mt-12 mb-4">
+            <div className="mx-auto max-w-5xl">
               <ul className="space-y-6 ">
                 {faqDetails.map(faq => (
                   <li key={faq.id}>
@@ -160,7 +160,7 @@ const Faqs: NextPage = () => {
         <div
           className={`max-w-7xl mx-3 xl:mx-auto p-6 lg:p-12 mb-10 mt-4 ${
             displayfaqs && 'bg-light'
-          }  rounded-4xl`}
+          }  rounded-3xl`}
         >
           <div className="mx-auto max-w-4xl">
             {displayfaqs && (
@@ -189,7 +189,7 @@ const Faqs: NextPage = () => {
 
                   <div className="flex-1 items-center">
                     <div className="relative ">
-                      <h2 className="text-3xl md:text-4xl text-center font-bold leading-10 tracking-tight">
+                      <h2 className="text-2xl md:text-4xl text-center font-bold leading-10 tracking-tight">
                         {title}
                       </h2>
                     </div>
