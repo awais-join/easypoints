@@ -1,5 +1,4 @@
 import React from "react";
-
 import Container from "../views/Container";
 import Link from "next/link";
 import ArrowIcon from "../icons/ArrowIcon";
@@ -31,27 +30,27 @@ const EasyToBookSection = () => {
               <li>
                 <Link
                   href="#"
-                  className="p-6 rounded-2xl flex items-center gap-4 text-2xl group  hover:bg-white hover:shadow-lg"
+                  className="p-6 rounded-2xl flex items-center gap-4 text-lg md:text-2xl group  hover:bg-white hover:shadow-lg"
                 >
-                  <ArrowIcon className="h-6 w-6 group-hover:text-primary-500" />
+                  <ArrowIcon className="h-6 w-6 min-w-[1.6rem] group-hover:text-primary-500" />
                   <span>Enter your flight details</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="#"
-                  className="p-6 rounded-2xl flex items-center gap-4 text-2xl group  hover:bg-white hover:shadow-lg"
+                  className="p-6 rounded-2xl flex items-center gap-4 text-lg md:text-2xl group  hover:bg-white hover:shadow-lg"
                 >
-                  <ArrowIcon className="h-6 w-6 group-hover:text-primary-500" />
+                  <ArrowIcon className="h-6 w-6 min-w-[1.6rem] group-hover:text-primary-500" />
                   <span>Let our algorithm work its magic!</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="#"
-                  className="p-6 rounded-2xl flex items-center gap-4 text-2xl group  hover:bg-white hover:shadow-lg"
+                  className="p-6 rounded-2xl flex items-center gap-4 text-lg md:text-2xl group  hover:bg-white hover:shadow-lg"
                 >
-                  <ArrowIcon className="h-6 w-6 group-hover:text-primary-500" />
+                  <ArrowIcon className="h-6 w-6 min-w-[1.6rem] group-hover:text-primary-500" />
                   <span>
                     Browse award flights from 100+ airlines instantly!
                   </span>

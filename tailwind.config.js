@@ -30,13 +30,11 @@ module.exports = {
           800: "#00325B",
           900: "#030221",
         },
-        lightBlue: '#F6F9FF',
-        darkBlue: '#E1E8F5',
-        text: '#434749'
       },
       boxShadow: {
         primary:
           "0px 14.9572px 22.4358px -4.48716px rgba(0, 0, 0, 0.1), 0px 5.98288px 8.97432px -5.98288px rgba(0, 0, 0, 0.1)",
+        button: "0px 4px 48px rgba(4, 142, 255, 0.4)",
       },
       borderRadius: {
         "4xl": "2.5rem",

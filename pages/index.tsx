@@ -1,11 +1,15 @@
-import React from "react";
-import { NextPage } from "next";
+import React from 'react';
+import {NextPage} from 'next';
 
-import FlightPriceSection from "@/components/home/FlightPriceSection";
-import HeroSection from "@/components/home/HeroSection";
-import Layout from "@/components/views/Layout";
-import SameFlightSection from "@/components/home/SameFlightSection";
-import EasyToBookSection from "@/components/home/EasyToBookSection";
+import FlightPriceSection from '@/components/home/FlightPriceSection';
+import HeroSection from '@/components/home/HeroSection';
+import Layout from '@/components/views/Layout';
+import SameFlightSection from '@/components/home/SameFlightSection';
+import EasyToBookSection from '@/components/home/EasyToBookSection';
+import VideoSection from '@/components/home/VideoSection';
+import TravelersSection from '@/components/home/TravelersSection';
+import FaqSection from '@/components/home/FaqSection';
+import CtaSection from '@/components/home/CtaSection';
 
 const Home: NextPage = () => {
   return (
@@ -17,6 +21,10 @@ const Home: NextPage = () => {
         </div>
         <SameFlightSection />
         <EasyToBookSection />
+        <VideoSection />
+        <TravelersSection />
+        <FaqSection />
+        <CtaSection />
       </Layout>
     </>
   );

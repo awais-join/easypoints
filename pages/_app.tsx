@@ -1,9 +1,11 @@
 import {Provider} from 'react-redux';
 import {store} from '@/store';
-import '../styles/globals.scss';
 import type {AppProps} from 'next/app';
 import {DefaultSeo} from 'next-seo';
 import {metaConstants} from '@/meta-constants';
+
+import "swiper/swiper-bundle.min.css";
+import '../styles/globals.scss';
 
 function MyApp({Component, pageProps}: AppProps) {
   return (

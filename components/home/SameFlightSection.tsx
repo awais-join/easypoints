@@ -1,6 +1,8 @@
 import React from "react";
-import Container from "../views/Container";
+import Link from "next/link";
 import Image from "next/image";
+
+import Container from "../views/Container";
 import FlightCard from "../cards/FlightCard";
 
 const flights = [
@@ -44,12 +46,12 @@ const SameFlightSection = () => {
               <p className="text-lg font-medium text-black75 mb-6">
                 Up to 90% less points used when booking with us.
               </p>
-              <button
-                type="submit"
-                className="w-full md:w-auto flex gap-2 items-center justify-center rounded-full bg-primary-500 px-10 py-5 text-base font-bold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+              <Link
+                href="#"
+                className="w-full md:w-auto inline-flex gap-2 items-center justify-center rounded-full bg-primary-500 px-10 py-5 text-base font-bold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
               >
                 <span>Search Flights</span>
-              </button>
+              </Link>
             </div>
             <div className="relative w-60 h-60 order-first md:order-last">
               <Image fill src="/assets/image-1.png" alt="..." />
