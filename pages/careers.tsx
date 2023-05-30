@@ -12,7 +12,7 @@ const Careers: NextPage = () => {
           <Container>
             <div className="mx-auto max-w-5xl">
               <div>
-                <h1 className="text-3xl text-center md:text-6xl font-bold leading-normal md:leading-snug mb-4">
+                <h1 className="text-3xl text-center md:text-6xl font-bold leading-normal md:leading-snug mb-4 ">
                   We’re leading the way in helping millions of Travelers
                 </h1>
                 <h4 className="text-2xl text-center leading-normal font-semibold text-black75 mb-6">
@@ -23,6 +23,7 @@ const Careers: NextPage = () => {
           </Container>
         </section>
       </div>
+      {/*  */}
       <div className="max-w-full mx-3 ">
         <section className="py-20 ">
           <Container>
