@@ -17,7 +17,7 @@ function CareersFilter() {
       <div className="md:flex-shrink-0 md:max-w-2xl p-2 lg:md:basis-1/2 grow hover:cursor-pointer">
         <div className="md:pl-6 xl:px-8 h-full bg-white bg-opacity-80  rounded-xl">
           <div className="flex flex-col md:flex-row justify-between h-full">
-            <div className="text-md xl:text-xl  rounded-[40px] bg-blue w-[70px] h-[56px]  lg:ml-0 py-[18px] px-[24px] text-white leading-snug inline-block text-center">
+            <div className="text-md xl:leading-5 sm:leading-5  xl:text-xl  rounded-[40px] bg-blue w-[70px] h-[56px]  lg:ml-0 py-[18px] px-[24px] text-white inline-block text-center">
               All
             </div>
             <div className="text-md xl:text-xl py-[18px] leading-snug inline-block lg:text-center">
