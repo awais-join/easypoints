@@ -8,10 +8,6 @@ interface CareersCardProps {
   description: string;
 }
 
-const formatNumber = (number: number): string => {
-  return number.toLocaleString();
-};
-
 const CareersCard: React.FC<CareersCardProps> = ({
   iconUrl,
   title,
