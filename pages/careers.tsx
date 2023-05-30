@@ -3,8 +3,48 @@ import {NextPage} from 'next';
 import Layout from '@/components/views/Layout';
 import Container from '@/components/views/Container';
 import CareersCard from '@/components/cards/CareersCard';
+import CareersJobsCard from '@/components/cards/CareersJobsCard';
+import CareersFilter from '@/components/careers/CareersFilter';
 
 const Careers: NextPage = () => {
+  const openedJobs = [
+    {
+      title: 'UI/UX and product designer',
+      description:
+        'Pusit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent.',
+      location: 'Los Angeles, CA',
+      type: 'Full Time',
+      category: 'Design',
+      iconColor: 'yellow'
+    },
+    {
+      title: 'Frontend developer',
+      description:
+        'Pusit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent.',
+      location: 'Los Angeles, CA',
+      type: 'Full Time',
+      category: 'Development',
+      iconColor: 'blue'
+    },
+    {
+      title: 'Finance analyst',
+      description:
+        'Pusit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent.',
+      location: 'Los Angeles, CA',
+      type: 'Full Time',
+      category: 'Business',
+      iconColor: 'lightPink'
+    },
+    {
+      title: 'Head of branding',
+      description:
+        'Pusit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent.',
+      location: 'Los Angeles, CA',
+      type: 'Full Time',
+      category: 'Design',
+      iconColor: 'yellow'
+    }
+  ];
   return (
     <Layout>
       <div className="max-w-full mx-3 p-6 bg-light rounded-b-3xl">
@@ -25,9 +65,9 @@ const Careers: NextPage = () => {
       </div>
       {/*  */}
       <div className="max-w-full mx-3 ">
-        <section className="py-20 ">
+        <section className="pt-20 ">
           <Container>
-            <div className="max-w-full xl:mx-auto p-6 pt-0 mb-4">
+            <div className="max-w-full xl:mx-auto md:p-6 pt-0 mb-4">
               <div className="mx-auto max-w-full">
                 <div className="grid grid-cols-1 grid-rows-1 xl:grid-cols-3 xl:grid-rows-3 gap-x-5 lg:gap-x-14 gap-y-4 md:gap-y-2">
                   <div className="col-span-full md:col-span-1 lg:row-span-2 pt-12 md:pt-12 lg:pt-0  xl:mb-12 ">
@@ -94,6 +134,36 @@ const Careers: NextPage = () => {
             </div>
           </Container>
         </section>
+        <div className="max-w-full mx-3 ">
+          <section className="py-20 ">
+            <Container>
+              <div className="max-w-full xl:mx-auto px-6 pt-0 mb-3 ">
+                <div className="mx-auto max-w-full">
+                  <div className="flex flex-wrap -m-2 mb-1.5 justify-center align-baseline ">
+                    <CareersFilter />
+                  </div>
+                </div>
+              </div>
+              <div className="max-w-full xl:mx-auto p-3 md:p-6 pt-0 mb-4">
+                <div className="mx-auto max-w-full">
+                  <div className="flex flex-wrap -m-2 mb-1.5 justify-center gap-2">
+                    {openedJobs.map(job => (
+                      <CareersJobsCard
+                        key={Math.random()}
+                        title={job.title}
+                        category={job.category}
+                        type={job.type}
+                        iconColor={job.iconColor}
+                        location={job.location}
+                        description={job.description}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+        </div>
       </div>
     </Layout>
   );
