@@ -1,9 +1,23 @@
-import React, { useState } from "react";
-import Container from "../views/Container";
-import Image from "next/image";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import React, {useState} from 'react';
+import {useRouter} from 'next/router';
+import Container from '../views/Container';
+import Image from 'next/image';
+import {MagnifyingGlassIcon} from '@heroicons/react/24/outline';
+import CustomSelect from '../inputs/CustomSelect';
+
+const flightType = [
+  {name: 'One Way', value: 'one-way'},
+  {name: 'Two Way', value: 'one-way'}
+];
+
+const flightClass = [
+  {name: '1 Adult, Economy', value: 'one-adult'},
+  {name: '2 Adults, Economy', value: 'two-adults'}
+];
 
 const FlightPriceSection = () => {
+  const {pathname} = useRouter();
+
   const [isSwitched, setIsSwitched] = useState(false);
 
   const handleSwitch = () => {
@@ -16,28 +30,15 @@ const FlightPriceSection = () => {
         <div className="bg-white rounded-4xl p-4 lg:p-6 lg:-mt-28 lg:translate-y-28">
           <div className="border border-lightGray rounded-3xl shadow-sm p-4 lg:p-8">
             <div className="flex items-center flex-wrap gap-6 mb-4">
-              <h5 className="font-bold text-lg mr-auto">
-                See the lowest flight price in points for any city pair:
-              </h5>
+              {pathname !== '/flight-search' && (
+                <h5 className="font-bold text-lg mr-auto">
+                  See the lowest flight price in points for any city pair:
+                </h5>
+              )}
+
               <div className="flex flex-wrap gap-4">
-                <select
-                  className="border-lightGray rounded-full"
-                  name="flight-way"
-                  id="flight-way"
-                >
-                  <option value="one-way">One Way</option>
-                  <option value="two-way">Two Way</option>
-                </select>
-                <select
-                  className="border-lightGray rounded-full"
-                  name="book-seat"
-                  id="book-seat"
-                >
-                  <option value="one-adult">1 Adult, Economy</option>
-                  <option value="two-adult">2 Adult, Economy</option>
-                  <option value="three-adult">3 Adult, Economy</option>
-                  <option value="four-adult">4 Adult, Economy</option>
-                </select>
+                <CustomSelect list={flightType} />
+                <CustomSelect list={flightClass} />
               </div>
             </div>
             <form>
@@ -45,7 +46,7 @@ const FlightPriceSection = () => {
                 <div className="border border-lightGray rounded-3xl lg:rounded-full px-4 py-2 flex flex-col lg:flex-row gap-4 lg:gap-0">
                   <div
                     className={`flex items-center flex-1 ${
-                      isSwitched ? "order-first" : "order-last"
+                      isSwitched ? 'order-first' : 'order-last'
                     }`}
                   >
                     <span className="h-8 w-8 min-w-[2rem] relative block mr-2">
@@ -70,7 +71,7 @@ const FlightPriceSection = () => {
                   </div>
                   <div
                     className={`flex items-center flex-1 ${
-                      isSwitched ? "order-last" : "order-first"
+                      isSwitched ? 'order-last' : 'order-first'
                     }`}
                   >
                     <span className="h-8 w-8 min-w-[2rem] relative block mr-2">

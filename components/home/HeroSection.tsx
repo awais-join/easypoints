@@ -1,6 +1,6 @@
-import React from "react";
-import Container from "../views/Container";
-import Image from "next/image";
+import React from 'react';
+import Container from '../views/Container';
+import Image from 'next/image';
 
 const HeroSection = () => {
   return (
@@ -9,10 +9,10 @@ const HeroSection = () => {
         <div className="flex flex-col lg:flex-row xl:items-end gap-10 xl:gap-28">
           <div className="max-w-md">
             <h1 className="text-4xl md:text-6xl font-bold leading-normal md:leading-snug mb-8">
-              Get the{" "}
+              Get the{' '}
               <span className="bg-primary-500 text-white pb-2 px-8 rounded-full">
                 most
-              </span>{" "}
+              </span>{' '}
               <br /> for your points
             </h1>
             <h4 className="text-2xl leading-normal font-semibold text-black75 xl:mb-8">
