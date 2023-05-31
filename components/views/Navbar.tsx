@@ -1,27 +1,27 @@
-import { Fragment, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { Dialog, Popover, Transition } from "@headlessui/react";
+import {Fragment, useState} from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import {useRouter} from 'next/router';
+import {Dialog, Popover, Transition} from '@headlessui/react';
 import {
   Bars3Icon,
   ChevronDownIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import Container from "./Container";
+  XMarkIcon
+} from '@heroicons/react/24/outline';
+import Container from './Container';
 
 const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Questions?", href: "/questions" },
-  { name: "Our services & pricing", href: "/services" },
+  {name: 'Home', href: '/'},
+  {name: 'Questions?', href: '/questions'},
+  {name: 'Our services & pricing', href: '/services'}
 ];
 
 const morePages = [
-  { name: "About us", href: "#" },
-  { name: "Careers", href: "#" },
-  { name: "Support", href: "#" },
-  { name: "Press", href: "#" },
-  { name: "Blog", href: "#" },
+  {name: 'About us', href: '#'},
+  {name: 'Careers', href: '#'},
+  {name: 'Support', href: '#'},
+  {name: 'Press', href: '#'},
+  {name: 'Blog', href: '#'}
 ];
 
 const Navbar = () => {
@@ -29,7 +29,7 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-light rounded-t-3xl m-3 mb-0">
+    <header className="relative bg-light rounded-t-3xl m-3 mb-0">
       <Container>
         <nav className="w-full flex items-center justify-between py-4">
           <Link href="/" className="-m-1.5 p-1.5">
@@ -48,12 +48,12 @@ const Navbar = () => {
             </button>
           </div>
           <div className="hidden xl:flex xl:gap-x-10 items-center">
-            {navigation.map((item) => (
+            {navigation.map(item => (
               <Link
                 key={item.name}
                 href={item.href}
                 className={`nav-link ${
-                  router.pathname === item.href && "active"
+                  router.pathname === item.href && 'active'
                 }`}
               >
                 {item.name}
@@ -78,7 +78,7 @@ const Navbar = () => {
                 leaveTo="opacity-0 translate-y-1"
               >
                 <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-gray-900/5">
-                  {morePages.map((item) => (
+                  {morePages.map(item => (
                     <Link
                       key={item.name}
                       href={item.href}
@@ -133,12 +133,12 @@ const Navbar = () => {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                {navigation.map((item) => (
+                {navigation.map(item => (
                   <Link
                     key={item.name}
                     href={item.href}
                     className={`-mx-3 block rounded-lg px-3 py-2 hover:bg-primary-500/5 nav-link ${
-                      router.pathname === item.href && "active bg-primary-500/5"
+                      router.pathname === item.href && 'active bg-primary-500/5'
                     }`}
                   >
                     {item.name}
@@ -163,7 +163,7 @@ const Navbar = () => {
                     leaveTo="opacity-0 translate-y-1"
                   >
                     <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-gray-900/5">
-                      {morePages.map((item) => (
+                      {morePages.map(item => (
                         <Link
                           key={item.name}
                           href={item.href}
