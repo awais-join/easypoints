@@ -17,6 +17,9 @@ module.exports = {
         light: '#F6F9FF',
         lightGray: '#E6E6E6',
         borderLight: '#ffffff33',
+        yellow: '#FCD53A',
+        blue: '#1C5CFF',
+        lightPink: '#CF95FB',
         primary: {
           DEFAULT: '#048EFF',
           50: '#BCE1FF',
