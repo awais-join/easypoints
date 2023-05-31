@@ -50,7 +50,7 @@ const BookCard = () => {
           <div className="w-full bg-light rounded-2xl p-3">
             <div className="bg-white rounded-2xl p-3">
               <div className="flex items-center gap-6">
-                <div className="space-y-2">
+                <div className="space-y-2 mr-auto">
                   <span className="block relative w-16 h-7">
                     <Image
                       fill
@@ -83,7 +83,7 @@ const BookCard = () => {
             <div className="mt-3 flex items-center gap-3">
               <ArrowTwoIcon className="h-6 w-6 text-black75" />
               <div className="bg-white rounded-xl p-3 flex items-center gap-3">
-                <span className="block relative w-24 h-10">
+                <span className="block relative w-24 h-10 mr-auto">
                   <Image
                     fill
                     className="object-contain"
@@ -119,7 +119,7 @@ const BookCard = () => {
           onClick={() => setOpen(!open)}
         >
           <span className="font-semibold capitalize">
-            {open ? 'Show' : 'Hide'} Details
+            {open ? 'Hide' : 'Show'} Details
           </span>
           <ChevronDownIcon
             className={`w-5 h-5 transition-all duration-300 ${
@@ -137,7 +137,7 @@ const BookCard = () => {
         leaveFrom="transform scale-100 opacity-100"
         leaveTo="transform scale-95 opacity-0"
       >
-        <div className="mt-6 bg-light rounded-2xl p-4 sm:p-6">
+        <div className="mt-4 xl:mt-6 bg-light rounded-2xl p-4 sm:p-6">
           <ul className="flex flex-col lg:flex-row lg:items-center gap-6 w-full">
             <li className="flex-1">
               <div className="bg-white rounded-2xl p-4 sm:p-6">

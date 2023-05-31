@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type Props = {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ type Props = {
 const Container = (props: Props) => {
   return (
     <div
-      className={`container mx-auto ${props.paddingZero ? 0 : "px-4 lg:px-10"}`}
+      className={`container mx-auto ${props.paddingZero ? 0 : 'px-4 lg:px-10'}`}
     >
       {props.children}
     </div>

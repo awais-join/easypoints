@@ -8,15 +8,18 @@ function classNames(...classes: string[]) {
 
 interface ListItem {
   name: string;
-  value: string;
+  value?: string;
 }
 
 interface CustomSelectProps {
   list: ListItem[];
+  placeholder?: string;
 }
 
-export default function CustomSelect({list}: CustomSelectProps) {
-  const [selected, setSelected] = useState<ListItem>(list[0]);
+export default function CustomSelect({list, placeholder}: CustomSelectProps) {
+  const [selected, setSelected] = useState<ListItem>(
+    placeholder ? null : list[0]
+  );
 
   return (
     <Listbox value={selected} onChange={setSelected}>
@@ -24,12 +27,12 @@ export default function CustomSelect({list}: CustomSelectProps) {
         <>
           <div className="relative">
             <Listbox.Button
-              className={`relative w-full cursor-default rounded-full bg-white py-2 pl-4 pr-10 text-left text-black shadow-sm ring-1 ring-inset ring-gray-200 focus:outline-none sm:text-sm sm:leading-6 ${
+              className={`relative w-full cursor-pointer rounded-full bg-white py-2 pl-4 pr-10 text-left text-black shadow-sm ring-1 ring-inset ring-gray-200 focus:outline-none sm:text-sm sm:leading-6 ${
                 open && 'ring-2 ring-primary-500'
               }`}
             >
               <span className="block truncate text-base">
-                {selected ? selected.name : 'Select an option'}
+                {selected ? selected.name : placeholder}
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                 <ChevronDownIcon
@@ -48,7 +51,7 @@ export default function CustomSelect({list}: CustomSelectProps) {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Listbox.Options className="absolute z-10 mt-1 space-y-2 max-h-60 w-full overflow-auto rounded-md bg-white p-3 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              <Listbox.Options className="absolute z-10 mt-1 space-y-2 max-h-60 md:min-w-[15rem] overflow-auto rounded-2xl bg-white p-3 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                 {list.map(item => (
                   <Listbox.Option
                     key={item.name}
