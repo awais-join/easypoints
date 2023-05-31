@@ -94,7 +94,7 @@ const FlightPriceSection = () => {
                   <div className="border-t lg:border-l border-lightGray relative mx-8" />
                   <input
                     className="w-full text-lg border-0 focus:ring-0 bg-transparent placeholder:text-black50"
-                    type="text"
+                    type="date"
                     name="return"
                     id="return"
                     placeholder="Return"
