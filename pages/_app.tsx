@@ -4,8 +4,9 @@ import type {AppProps} from 'next/app';
 import {DefaultSeo} from 'next-seo';
 import {metaConstants} from '@/meta-constants';
 
-import "swiper/swiper-bundle.min.css";
-import '../styles/globals.scss';
+import 'swiper/swiper-bundle.min.css';
+import '../styles/rc-slider.css';
+import '../styles/globals.css';
 
 function MyApp({Component, pageProps}: AppProps) {
   return (
