@@ -1,7 +1,7 @@
 import React from 'react';
 import {NextPage} from 'next';
 
-import FlightPriceSection from '@/components/home/FlightPriceSection';
+import FlightSearch from '@/components/inputs/FlightSearch';
 import HeroSection from '@/components/home/HeroSection';
 import Layout from '@/components/views/Layout';
 import SameFlightSection from '@/components/home/SameFlightSection';
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
       <Layout>
         <div className="bg-light rounded-b-3xl mx-3">
           <HeroSection />
-          <FlightPriceSection />
+          <FlightSearch />
         </div>
         <SameFlightSection />
         <EasyToBookSection />

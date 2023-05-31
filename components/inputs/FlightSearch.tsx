@@ -3,7 +3,7 @@ import {useRouter} from 'next/router';
 import Container from '../views/Container';
 import Image from 'next/image';
 import {MagnifyingGlassIcon} from '@heroicons/react/24/outline';
-import CustomSelect from '../inputs/CustomSelect';
+import CustomSelect from './CustomSelect';
 
 const flightType = [
   {name: 'One Way', value: 'one-way'},

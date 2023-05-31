@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface IconProps {
   width?: number;
@@ -9,7 +9,7 @@ interface IconProps {
 
 const ArrowIcon: React.FC<IconProps> = ({
   className,
-  color = "currentColor",
+  color = 'currentColor'
 }) => {
   return (
     <svg
