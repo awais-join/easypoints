@@ -1,27 +1,27 @@
-import React from "react";
-import Container from "./Container";
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
+import React from 'react';
+import Container from './Container';
+import Link from 'next/link';
+import Image from 'next/image';
+import {useRouter} from 'next/router';
 
 const navigation = [
   //   { name: "Home", href: "/" },
-  { name: "Questions?", href: "/questions" },
-  { name: "Our services & pricing", href: "/services" },
-  { name: "Become an affiliate", href: "/affiliate" },
-  { name: "Careers", href: "/careers" },
+  {name: 'Questions?', href: '/questions'},
+  {name: 'Our services & pricing', href: '/services'},
+  {name: 'Become an affiliate', href: '/affiliate'},
+  {name: 'Careers', href: '/careers'}
 ];
 
 const termsLinks = [
-  { name: "Earn more points", href: "/earn" },
-  { name: "Terms of use", href: "/terms" },
-  { name: "Privacy policy", href: "/privacy-policy" },
+  {name: 'Earn more points', href: '/earn'},
+  {name: 'Terms of use', href: '/terms'},
+  {name: 'Privacy policy', href: '/privacy-policy'}
 ];
 
 const social = [
   {
-    name: "Facebook",
-    href: "#",
+    name: 'Facebook',
+    href: '#',
     icon: (props: React.SVGProps<SVGSVGElement>) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
         <path
@@ -30,48 +30,48 @@ const social = [
           clipRule="evenodd"
         />
       </svg>
-    ),
+    )
   },
   {
-    name: "Twitter",
-    href: "#",
+    name: 'Twitter',
+    href: '#',
     icon: (props: React.SVGProps<SVGSVGElement>) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
         <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
       </svg>
-    ),
+    )
   },
   {
-    name: "linkedin",
-    href: "https://www.linkedin.com/",
+    name: 'linkedin',
+    href: 'https://www.linkedin.com/',
     icon: (props: React.SVGProps<SVGSVGElement>) => (
       <svg {...props} viewBox="0 0 300 300">
         <g
           style={{
-            stroke: "none",
+            stroke: 'none',
             strokeWidth: 0,
-            strokeDasharray: "none",
-            strokeLinecap: "butt",
-            strokeLinejoin: "miter",
+            strokeDasharray: 'none',
+            strokeLinecap: 'butt',
+            strokeLinejoin: 'miter',
             strokeMiterlimit: 10,
-            fill: "none",
-            fillRule: "nonzero",
-            opacity: 1,
+            fill: 'none',
+            fillRule: 'nonzero',
+            opacity: 1
           }}
           transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"
         >
           <path
             d="M 1.48 29.91 h 18.657 v 60.01 H 1.48 V 29.91 z M 10.809 0.08 c 5.963 0 10.809 4.846 10.809 10.819 c 0 5.967 -4.846 10.813 -10.809 10.813 C 4.832 21.712 0 16.866 0 10.899 C 0 4.926 4.832 0.08 10.809 0.08"
             style={{
-              stroke: "none",
+              stroke: 'none',
               strokeWidth: 1,
-              strokeDasharray: "none",
-              strokeLinecap: "butt",
-              strokeLinejoin: "miter",
+              strokeDasharray: 'none',
+              strokeLinecap: 'butt',
+              strokeLinejoin: 'miter',
               strokeMiterlimit: 10,
-              fill: "currentColor",
-              fillRule: "nonzero",
-              opacity: 1,
+              fill: 'currentColor',
+              fillRule: 'nonzero',
+              opacity: 1
             }}
             transform=" matrix(1 0 0 1 0 0) "
             strokeLinecap="round"
@@ -79,26 +79,26 @@ const social = [
           <path
             d="M 31.835 29.91 h 17.89 v 8.206 h 0.255 c 2.49 -4.72 8.576 -9.692 17.647 -9.692 C 86.514 28.424 90 40.849 90 57.007 V 89.92 H 71.357 V 60.737 c 0 -6.961 -0.121 -15.912 -9.692 -15.912 c -9.706 0 -11.187 7.587 -11.187 15.412 V 89.92 H 31.835 V 29.91 z"
             style={{
-              stroke: "none",
+              stroke: 'none',
               strokeWidth: 1,
-              strokeDasharray: "none",
-              strokeLinecap: "butt",
-              strokeLinejoin: "miter",
+              strokeDasharray: 'none',
+              strokeLinecap: 'butt',
+              strokeLinejoin: 'miter',
               strokeMiterlimit: 10,
-              fill: "currentColor",
-              fillRule: "nonzero",
-              opacity: 1,
+              fill: 'currentColor',
+              fillRule: 'nonzero',
+              opacity: 1
             }}
             transform=" matrix(1 0 0 1 0 0) "
             strokeLinecap="round"
           />
         </g>
       </svg>
-    ),
+    )
   },
   {
-    name: "Instagram",
-    href: "#",
+    name: 'Instagram',
+    href: '#',
     icon: (props: React.SVGProps<SVGSVGElement>) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
         <path
@@ -107,8 +107,8 @@ const social = [
           clipRule="evenodd"
         />
       </svg>
-    ),
-  },
+    )
+  }
 ];
 
 const Footer = () => {
@@ -144,7 +144,7 @@ const Footer = () => {
                   <span className="absolute top-0 right-0">
                     <button
                       type="submit"
-                      className="rounded-full bg-primary-500 px-6 py-4 text-base font-bold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+                      className="rounded-full bg-primary-500 px-6 py-4 scale-105 text-base font-bold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
                     >
                       Subscribe
                     </button>
@@ -157,14 +157,14 @@ const Footer = () => {
           <div className="xl:col-span-2 md:pt-12 pb-12">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 xl:pl-6">
               <ul className="space-y-4">
-                {navigation.map((item) => (
+                {navigation.map(item => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
                       className={`text-lg hover:text-primary-400 ${
                         router.pathname === item.href
-                          ? "active text-primary-400"
-                          : "text-white"
+                          ? 'active text-primary-400'
+                          : 'text-white'
                       }`}
                     >
                       {item.name}
@@ -173,14 +173,14 @@ const Footer = () => {
                 ))}
               </ul>
               <ul className="space-y-4">
-                {termsLinks.map((item) => (
+                {termsLinks.map(item => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
                       className={`text-lg hover:text-primary-400 ${
                         router.pathname === item.href
-                          ? "active text-primary-400"
-                          : "text-white"
+                          ? 'active text-primary-400'
+                          : 'text-white'
                       }`}
                     >
                       {item.name}
@@ -194,7 +194,7 @@ const Footer = () => {
                 Follow us on social media
               </h4>
               <ul className="flex gap-6 md:pt-8">
-                {social.map((item) => (
+                {social.map(item => (
                   <li key={item.name}>
                     <a
                       href={item.href}
