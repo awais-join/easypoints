@@ -43,6 +43,24 @@ const Careers: NextPage = () => {
       type: 'Full Time',
       category: 'Design',
       iconColor: 'yellow'
+    },
+    {
+      title: 'Accounts analyst',
+      description:
+        'Pusit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent.',
+      location: 'Los Angeles, CA',
+      type: 'Full Time',
+      category: 'Business',
+      iconColor: 'lightPink'
+    },
+    {
+      title: 'Laravel Developer',
+      description:
+        'Pusit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent.',
+      location: 'Los Angeles, CA',
+      type: 'Full Time',
+      category: 'Development',
+      iconColor: 'blue'
     }
   ];
   return (
@@ -140,24 +158,7 @@ const Careers: NextPage = () => {
               <div className="max-w-full xl:mx-auto px-6 pt-0 mb-3 ">
                 <div className="mx-auto max-w-full">
                   <div className="flex flex-wrap -m-2 mb-1.5 justify-center align-baseline ">
-                    <CareersFilter />
-                  </div>
-                </div>
-              </div>
-              <div className="max-w-full xl:mx-auto p-3 md:p-6 pt-0 mb-4">
-                <div className="mx-auto max-w-full">
-                  <div className="flex flex-wrap -m-2 mb-1.5 justify-center gap-2">
-                    {openedJobs.map(job => (
-                      <CareersJobsCard
-                        key={Math.random()}
-                        title={job.title}
-                        category={job.category}
-                        type={job.type}
-                        iconColor={job.iconColor}
-                        location={job.location}
-                        description={job.description}
-                      />
-                    ))}
+                    <CareersFilter openedJobs={openedJobs} />
                   </div>
                 </div>
               </div>
