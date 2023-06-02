@@ -9,16 +9,17 @@ import {
   XMarkIcon
 } from '@heroicons/react/24/outline';
 import Container from './Container';
+import UserComponent from '../UserComponent';
 
 const navigation = [
   {name: 'Home', href: '/'},
-  {name: 'Questions?', href: '/questions'},
-  {name: 'Our services & pricing', href: '/services'}
+  {name: 'Questions?', href: '/faqs'},
+  {name: 'Our services & pricing', href: '/pricing'}
 ];
 
 const morePages = [
   {name: 'About us', href: '#'},
-  {name: 'Careers', href: '#'},
+  {name: 'Careers', href: 'careers'},
   {name: 'Support', href: '#'},
   {name: 'Press', href: '#'},
   {name: 'Blog', href: '#'}
@@ -104,6 +105,7 @@ const Navbar = () => {
                 Login
               </Link>
             </div>
+            <UserComponent />
           </div>
         </nav>
       </Container>
@@ -189,6 +191,9 @@ const Navbar = () => {
                 >
                   Login
                 </Link>
+              </div>
+              <div className="pb-6">
+                <UserComponent />
               </div>
             </div>
           </div>
