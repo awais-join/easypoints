@@ -91,21 +91,24 @@ const Navbar = () => {
                 </Popover.Panel>
               </Transition>
             </Popover>
-            <div className="flex gap-4">
-              <Link
-                href="/sign-up"
-                className="rounded-full bg-primary-500 px-8 py-4 text-base font-bold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
-              >
-                Sign up
-              </Link>
-              <Link
-                href="/sign-in"
-                className="rounded-full bg-light px-8 py-4 text-base font-bold text-primary-500 border border-primary-500 shadow-sm hover:bg-primary-600 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
-              >
-                Login
-              </Link>
-            </div>
-            <UserComponent />
+            {router.pathname !== '/flight-search' ? (
+              <div className="flex gap-4">
+                <Link
+                  href="/sign-up"
+                  className="rounded-full bg-primary-500 px-8 py-4 text-base font-bold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+                >
+                  Sign up
+                </Link>
+                <Link
+                  href="/sign-in"
+                  className="rounded-full bg-light px-8 py-4 text-base font-bold text-primary-500 border border-primary-500 shadow-sm hover:bg-primary-600 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+                >
+                  Login
+                </Link>
+              </div>
+            ) : (
+              <UserComponent />
+            )}
           </div>
         </nav>
       </Container>
