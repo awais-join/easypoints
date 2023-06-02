@@ -14,7 +14,7 @@ const CareersCard: React.FC<CareersCardProps> = ({
   description
 }) => {
   return (
-    <div className="border border-lightGray p-8 w-full h-full rounded-3xl">
+    <div className="border border-lightGray flex flex-col justify-center p-8 w-full h-full rounded-3xl">
       {iconUrl !== '' && (
         <div className="mb-6">
           <Image

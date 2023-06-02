@@ -87,15 +87,15 @@ const Careers: NextPage = () => {
           <Container>
             <div className="max-w-full xl:mx-auto md:p-6 pt-0 mb-4">
               <div className="mx-auto max-w-full">
-                <div className="grid grid-cols-1 grid-rows-1 xl:grid-cols-3 xl:grid-rows-3 gap-x-5 lg:gap-x-14 gap-y-4 md:gap-y-2">
-                  <div className="col-span-full md:col-span-1 lg:row-span-2 pt-12 md:pt-12 lg:pt-0  xl:mb-12 ">
+                <div className="grid grid-cols-1  grid-rows-1 xl:grid-cols-3 xl:grid-rows-3 gap-x-5 lg:gap-x-14 lg:gap-y-8 gap-y-4 md:gap-y-2">
+                  <div className="col-span-full md:col-span-1 lg:row-span-2 pt-12 md:pt-12 lg:pt-0  ">
                     <img
                       className="xl:w-full xl:h-full object-cover rounded-4xl"
                       src="/assets/laptop.jpg"
                       alt="Laptop Image"
                     />
                   </div>
-                  <div className="col-span-full md:col-span-1 rounded-lg pt-16 ">
+                  <div className="col-span-full  md:col-span-1 rounded-lg  ">
                     <CareersCard
                       iconUrl="http://localhost:3000/assets/clock.svg"
                       title="Flexible hours"
@@ -103,7 +103,7 @@ const Careers: NextPage = () => {
                     />
                   </div>
 
-                  <div className="col-span-full md:col-span-1 rounded-lg  pt-16">
+                  <div className="col-span-full md:col-span-1 rounded-lg ">
                     <CareersCard
                       iconUrl=""
                       title="Unlimited PTO"
@@ -113,7 +113,7 @@ const Careers: NextPage = () => {
                       venenatis, lectus magna fringilla.enenatis, lectus magna"
                     />
                   </div>
-                  <div className="col-span-full md:col-span-1 rounded-lg pt-12 md:pt-16">
+                  <div className="col-span-full md:col-span-1 rounded-lg ">
                     <CareersCard
                       iconUrl="/assets/remote.svg"
                       title="Remote"
@@ -121,14 +121,14 @@ const Careers: NextPage = () => {
                       porttitor us rhoncus dolor purus non enim praesent."
                     />
                   </div>
-                  <div className="col-span-full md:col-span-1 lg:row-span-2  pt-12  xl:pt-8 xl:mb-0 mb-16">
+                  <div className="col-span-full md:col-span-1 lg:row-span-2  ">
                     <img
                       className="xl:w-full xl:h-full object-cover rounded-4xl"
                       src="/assets/plane.jpg"
                       alt="Plane Image"
                     />
                   </div>
-                  <div className="col-span-full md:col-span-1 rounded-lg  pt-12 md:pt-0 ">
+                  <div className="col-span-full md:col-span-1 rounded-lg   ">
                     <CareersCard
                       iconUrl=""
                       title=" Medical insurance"
@@ -139,7 +139,7 @@ const Careers: NextPage = () => {
                       fringilla."
                     />
                   </div>
-                  <div className="col-span-full md:col-span-1 rounded-lg  pt-12 md:pt-12">
+                  <div className="col-span-full md:col-span-1 rounded-lg  ">
                     <CareersCard
                       iconUrl="/assets/heart.svg"
                       title="Parental leave"
