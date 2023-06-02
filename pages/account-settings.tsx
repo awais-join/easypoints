@@ -8,6 +8,7 @@ import {Tab} from '@headlessui/react';
 import PersonalInfoPanel from '@/components/account-settings/panel/PersonalInfoPanel';
 import AccountSettingsTabs from '@/components/account-settings/tabs/AccountSettingTabs';
 import LoginPanel from '@/components/account-settings/panel/LoginPanel';
+import BillingPanel from '@/components/account-settings/panel/BillingPanel';
 
 interface TermsAndConditionsProps {}
 function classNames(...classes: any) {
@@ -60,14 +61,14 @@ const AccountSettings: NextPage = () => {
               <Tab.Group>
                 <div className="mx-auto max-w-full">
                   <div className="flex flex-wrap -m-2 mb-1.5 justify-center align-baseline ">
-                    <Tab.List className="md:flex-shrink-0 mb-4  px-2 lg:md:basis-[35%] grow hover:cursor-pointer">
+                    <Tab.List className="lg:flex-shrink-0 mb-4  px-2 lg:basis-[35%] grow ">
                       {tabs.map((tab: any, index) => (
                         <Tab
                           className={({selected}) =>
                             classNames(
                               'w-full rounded-xl',
                               selected
-                                ? 'bg-light  border-r border-primary-500'
+                                ? 'bg-light outline-white border-r border-primary-500'
                                 : ' '
                             )
                           }
@@ -76,12 +77,15 @@ const AccountSettings: NextPage = () => {
                         </Tab>
                       ))}
                     </Tab.List>
-                    <Tab.Panels className="md:flex-shrink-0  px-2 text-left lg:md:basis-[65%] grow hover:cursor-pointer">
+                    <Tab.Panels className="md:flex-shrink-0  px-2 text-left lg:md:basis-[65%] grow ">
                       <Tab.Panel>
                         <PersonalInfoPanel />
                       </Tab.Panel>
                       <Tab.Panel>
                         <LoginPanel />
+                      </Tab.Panel>
+                      <Tab.Panel>
+                        <BillingPanel />
                       </Tab.Panel>
                     </Tab.Panels>
                   </div>
