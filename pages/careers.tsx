@@ -3,7 +3,6 @@ import {NextPage} from 'next';
 import Layout from '@/components/views/Layout';
 import Container from '@/components/views/Container';
 import CareersCard from '@/components/cards/CareersCard';
-import CareersJobsCard from '@/components/cards/CareersJobsCard';
 import CareersFilter from '@/components/careers/CareersFilter';
 
 const Careers: NextPage = () => {

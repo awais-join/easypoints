@@ -42,6 +42,7 @@ const CareersJobsCard: React.FC<JobsCardProps> = ({
           query: jobDetails
         }}
         as="/careerDetails"
+        className="md:flex-shrink-0 md:max-w-2xl  md:basis-[49%]  "
       >
         <div className="md:flex-shrink-0 md:max-w-2xl p-2 md:basis-[49%] border hover:border-gray-300 rounded-2xl grow hover:cursor-pointer hover:shadow-2xl">
           <div className="p-3 md:p-8 h-full bg-white bg-opacity-80  rounded-xl">

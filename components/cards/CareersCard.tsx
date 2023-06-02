@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React from 'react';
-import Container from '@/components/views/Container';
 
 interface CareersCardProps {
   iconUrl: string;
