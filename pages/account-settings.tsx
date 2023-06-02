@@ -5,15 +5,37 @@ import {metaConstants} from '@/meta-constants';
 import Container from '@/components/views/Container';
 import Layout from '@/components/views/Layout';
 import {Tab} from '@headlessui/react';
-import Link from 'next/link';
-import ArrowIcon from '../components/icons/ArrowIcon';
-import Image from 'next/image';
-import Form from '@/components/account-settings/form';
+import PersonalInfoPanel from '@/components/account-settings/panel/PersonalInfoPanel';
+import AccountSettingsTabs from '@/components/account-settings/tabs/AccountSettingTabs';
+import LoginPanel from '@/components/account-settings/panel/LoginPanel';
 
 interface TermsAndConditionsProps {}
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
+const tabs = [
+  {
+    title: 'Personal Information',
+    subTitle: 'View your details'
+  },
+  {
+    title: 'Login and Security',
+    subTitle: 'Set up and manage your password'
+  },
+  {
+    title: 'Plan and billing',
+    subTitle: 'Manage your plan and billing'
+  },
+  {
+    title: 'Reward Flights',
+    subTitle: 'All your flight and booking details'
+  },
+  {
+    title: 'Get In Touch',
+    subTitle: 'All your flight and booking details'
+  }
+];
+
 const AccountSettings: NextPage = () => {
   return (
     <>
@@ -39,60 +61,27 @@ const AccountSettings: NextPage = () => {
                 <div className="mx-auto max-w-full">
                   <div className="flex flex-wrap -m-2 mb-1.5 justify-center align-baseline ">
                     <Tab.List className="md:flex-shrink-0 mb-4  px-2 lg:md:basis-[35%] grow hover:cursor-pointer">
-                      <Tab
-                        className={({selected}) =>
-                          classNames('w-full', selected ? 'bg-light' : ' ')
-                        }
-                      >
-                        {' '}
-                        <div className="pl-4 lg:pl-8 h-full  rounded-xl">
-                          <div className=" text-left   h-full">
-                            <div className="flex flex-wrap items-center gap-2 xl:gap-4">
-                              <div className="w-auto ">
-                                <Image
-                                  width="24"
-                                  height="24"
-                                  src="/assets/user.png"
-                                  alt="Test"
-                                  className="rounded "
-                                />
-                              </div>
-
-                              <div className=" xl:px-8 py-6 lg:w-[75%]">
-                                <h4 className="mb-1 text-lg font-bold  leading-snug">
-                                  Personal Information
-                                </h4>
-                                <p className="text-gray-500 font-medium leading-relaxed pr-8">
-                                  View your details
-                                </p>
-                              </div>
-                              <div className="w-auto">
-                                <Image
-                                  width="24"
-                                  height="24"
-                                  src="/assets/right.svg"
-                                  alt="Test"
-                                  className="rounded "
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </Tab>
+                      {tabs.map((tab: any, index) => (
+                        <Tab
+                          className={({selected}) =>
+                            classNames(
+                              'w-full rounded-xl',
+                              selected
+                                ? 'bg-light  border-r border-primary-500'
+                                : ' '
+                            )
+                          }
+                        >
+                          <AccountSettingsTabs tabsDetails={tab} />
+                        </Tab>
+                      ))}
                     </Tab.List>
                     <Tab.Panels className="md:flex-shrink-0  px-2 text-left lg:md:basis-[65%] grow hover:cursor-pointer">
                       <Tab.Panel>
-                        {' '}
-                        <div className="lg:px-8 h-full  ">
-                          <div className="flex  justify-between  h-full">
-                            <div className="mb-4 md:basis-[100%] rounded-2xl border-solid border border-lightGray pt-6 pb-8 px-2 lg:px-8">
-                              <h2 className=" text-3xl font-bold font-heading leading-snug mb-6">
-                                Personal Information
-                              </h2>
-                              <Form />
-                            </div>
-                          </div>
-                        </div>
+                        <PersonalInfoPanel />
+                      </Tab.Panel>
+                      <Tab.Panel>
+                        <LoginPanel />
                       </Tab.Panel>
                     </Tab.Panels>
                   </div>
