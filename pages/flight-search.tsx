@@ -8,6 +8,7 @@ import FlightSearch from '@/components/inputs/FlightSearch';
 import Layout from '@/components/views/Layout';
 import BookCard from '@/components/cards/BookCard';
 import FilterCard from '@/components/cards/FilterCard';
+import BookingOptions from '@/components/modal/BookingOptions';
 
 interface FlightSearchProps {}
 
@@ -34,6 +35,7 @@ const FlightSearchPage: NextPage<FlightSearchProps> = () => {
               {/* /books cards */}
             </div>
           </Container>
+          <BookingOptions />
         </section>
       </Layout>
     </>
