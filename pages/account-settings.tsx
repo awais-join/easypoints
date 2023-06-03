@@ -9,6 +9,7 @@ import PersonalInfoPanel from '@/components/account-settings/panel/PersonalInfoP
 import AccountSettingsTabs from '@/components/account-settings/tabs/AccountSettingTabs';
 import LoginPanel from '@/components/account-settings/panel/LoginPanel';
 import BillingPanel from '@/components/account-settings/panel/BillingPanel';
+import RewardFlightsPanel from '@/components/account-settings/panel/RewardFlightsPanel';
 
 interface TermsAndConditionsProps {}
 function classNames(...classes: any) {
@@ -68,7 +69,7 @@ const AccountSettings: NextPage = () => {
                             classNames(
                               'w-full rounded-xl',
                               selected
-                                ? 'bg-light outline-white border-r border-primary-500'
+                                ? 'bg-light border-r border-primary-500 outline-none '
                                 : ' '
                             )
                           }
@@ -86,6 +87,9 @@ const AccountSettings: NextPage = () => {
                       </Tab.Panel>
                       <Tab.Panel>
                         <BillingPanel />
+                      </Tab.Panel>
+                      <Tab.Panel>
+                        <RewardFlightsPanel />
                       </Tab.Panel>
                     </Tab.Panels>
                   </div>
