@@ -10,6 +10,7 @@ import AccountSettingsTabs from '@/components/account-settings/tabs/AccountSetti
 import LoginPanel from '@/components/account-settings/panel/LoginPanel';
 import BillingPanel from '@/components/account-settings/panel/BillingPanel';
 import RewardFlightsPanel from '@/components/account-settings/panel/RewardFlightsPanel';
+import GetInTouchPanel from '@/components/account-settings/panel/GetInTouchPanel';
 
 interface TermsAndConditionsProps {}
 function classNames(...classes: any) {
@@ -18,23 +19,28 @@ function classNames(...classes: any) {
 const tabs = [
   {
     title: 'Personal Information',
-    subTitle: 'View your details'
+    subTitle: 'View your details',
+    iconUrl: '/assets/user.svg'
   },
   {
     title: 'Login and Security',
-    subTitle: 'Set up and manage your password'
+    subTitle: 'Set up and manage your password',
+    iconUrl: '/assets/lock.svg'
   },
   {
     title: 'Plan and billing',
-    subTitle: 'Manage your plan and billing'
+    subTitle: 'Manage your plan and billing',
+    iconUrl: '/assets/card.svg'
   },
   {
     title: 'Reward Flights',
-    subTitle: 'All your flight and booking details'
+    subTitle: 'All your flight and booking details',
+    iconUrl: '/assets/airplane.svg'
   },
   {
     title: 'Get In Touch',
-    subTitle: 'All your flight and booking details'
+    subTitle: 'All your flight and booking details',
+    iconUrl: '/assets/question.svg'
   }
 ];
 
@@ -78,7 +84,7 @@ const AccountSettings: NextPage = () => {
                         </Tab>
                       ))}
                     </Tab.List>
-                    <Tab.Panels className="md:flex-shrink-0  px-2 text-left lg:md:basis-[65%] grow ">
+                    <Tab.Panels className="lg:flex-shrink-0  px-2 text-left lg:md:basis-[65%] grow ">
                       <Tab.Panel>
                         <PersonalInfoPanel />
                       </Tab.Panel>
@@ -90,6 +96,9 @@ const AccountSettings: NextPage = () => {
                       </Tab.Panel>
                       <Tab.Panel>
                         <RewardFlightsPanel />
+                      </Tab.Panel>
+                      <Tab.Panel>
+                        <GetInTouchPanel />
                       </Tab.Panel>
                     </Tab.Panels>
                   </div>

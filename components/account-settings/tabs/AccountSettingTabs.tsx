@@ -13,7 +13,7 @@ const PersonalInfoTab: React.FC<Tabs> = ({tabsDetails}) => {
             <Image
               width="24"
               height="24"
-              src="/assets/user.png"
+              src={tabsDetails.iconUrl}
               alt="Test"
               className="rounded "
             />
