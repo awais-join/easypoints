@@ -1,4 +1,4 @@
-import {Fragment, useState} from 'react';
+import {Fragment, useState, FC} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
 import {XMarkIcon, InformationCircleIcon} from '@heroicons/react/24/outline';
 import Container from '../views/Container';
@@ -59,7 +59,7 @@ const BookingOptions = () => {
                     </span>
                   </h5>
 
-                  <ul className="grid grid-cols-1 lg:grid-cols-3 gap-4 ">
+                  <ul className="grid grid-cols-1 lg:grid-cols-3">
                     {/* flight details card */}
                     <li>
                       <h5 className="flex items-center text-lg font-bold mb-7 gap-2">
@@ -89,9 +89,9 @@ const BookingOptions = () => {
                           </div>
                         </div>
 
-                        <div className="bg-white rounded-2xl p-2">
-                          <div className="grid grid-rows-1 grid-flow-col mx-3">
-                            <div className="row-span-2 relative w-6 h-7">
+                        <div className="bg-white rounded-2xl px-2 py-4">
+                          <div className="flex justify-center">
+                            <div className="row-span-1 mr-1 relative w-6">
                               <Image
                                 fill
                                 className="object-contain"
@@ -99,8 +99,8 @@ const BookingOptions = () => {
                                 alt="..."
                               />
                             </div>
-                            <div>
-                              <div className="flex gap-8 items-center my-3">
+                            <div className="space-y-4">
+                              <div className="flex gap-8 items-center">
                                 <div className="font-semibold text-sm text-black">
                                   8:45 AM
                                 </div>
@@ -119,7 +119,7 @@ const BookingOptions = () => {
                                   United Airlines UA57781
                                 </div>
                               </div>
-                              <div className="flex gap-8 items-center my-3">
+                              <div className="flex gap-8 items-center">
                                 <div className="font-semibold text-sm text-black">
                                   8:45 AM
                                 </div>
@@ -141,9 +141,9 @@ const BookingOptions = () => {
                           </span>
                         </div>
 
-                        <div className="bg-white rounded-2xl p-2">
-                          <div className="grid grid-rows-1 grid-flow-col mx-3">
-                            <div className="row-span-2 relative w-6 h-7">
+                        <div className="bg-white rounded-2xl px-2 py-4">
+                          <div className="flex justify-center">
+                            <div className="row-span-1 mr-1 relative w-6">
                               <Image
                                 fill
                                 className="object-contain"
@@ -151,8 +151,8 @@ const BookingOptions = () => {
                                 alt="..."
                               />
                             </div>
-                            <div>
-                              <div className="flex gap-8 items-center my-3">
+                            <div className="space-y-4">
+                              <div className="flex gap-8 items-center">
                                 <div className="font-semibold text-sm text-black">
                                   8:45 AM
                                 </div>
@@ -171,7 +171,7 @@ const BookingOptions = () => {
                                   United Airlines UA57781
                                 </div>
                               </div>
-                              <div className="flex gap-8 items-center my-3">
+                              <div className="flex gap-8 items-center">
                                 <div className="font-semibold text-sm text-black">
                                   8:45 AM
                                 </div>
@@ -189,8 +189,8 @@ const BookingOptions = () => {
                     </li>
 
                     {/* payment and points card */}
-                    <li className="lg:col-span-2 ml-10">
-                      <h5 className="flex items-center text-lg font-bold mb-7 gap-2">
+                    <li className="lg:col-span-2 lg:ml-10">
+                      <h5 className="flex items-center text-lg font-bold mb-7 gap-2 lg:mt-0 mt-6">
                         <span className="flex items-center justify-center h-6 w-6 min-w-[1.5rem] text-white bg-primary-500 text-sm font-bold rounded-full">
                           2
                         </span>
@@ -212,15 +212,48 @@ const BookingOptions = () => {
                         </h5>
                       </div>
 
-                      <div className="bg-light rounded-2xl border border-dashed p-2">
-                        <div className='p-3'>
-                          <h5 className="flex items-center text-sm font-bold mb-7">
+                      <div className="bg-light rounded-2xl border border-dashed pt-2 px-2 mt-5">
+                        <div className="p-3">
+                          <h5 className="flex items-center text-sm font-bold mb-4">
                             easypoints pick:
                             <InformationCircleIcon
                               title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, doloremque sunt aliquid sint voluptates ad doloribus dicta expedita eos et?"
                               className="h-4 w-4 min-w-[1rem] text-black75 ml-3"
                             />
                           </h5>
+                          {[1, 2].map(() => (
+                            <PointsDealListCard cardType={'easypoints'} />
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="bg-light rounded-2xl border border-dashed pt-2 px-2 mt-5">
+                        <div className="p-3">
+                          <h5 className="flex items-center text-sm font-bold mb-4">
+                            Transfer points from a credit card:
+                          </h5>
+                          {[1, 2, 3, 4, 5, 6].map(() => (
+                            <PointsDealListCard cardType={'other'} />
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="bg-light rounded-2xl border border-dashed pt-2 px-2 mt-5">
+                        <div className="p-3">
+                          <h5 className="flex items-center text-sm font-bold mb-4">
+                            Explore other programs:
+                          </h5>
+                          {[1, 2].map(() => (
+                            <PointsDealListCard cardType={'other'} />
+                          ))}
+
+                          <h5 className="flex items-center text-sm font-bold mb-4">
+                            Pay retail price:
+                          </h5>
+
+                          <div className="bg-white rounded-3xl text-black px-3 py-4 mb-4 font-normal text-sm">
+                            $9,868 via skyscanner
+                          </div>
                         </div>
                       </div>
                     </li>
@@ -232,6 +265,49 @@ const BookingOptions = () => {
         </div>
       </Dialog>
     </Transition.Root>
+  );
+};
+
+interface PointsDealListCardProps {
+  cardType: string;
+}
+
+const PointsDealListCard: FC<PointsDealListCardProps> = ({cardType}) => {
+  return (
+    <div className="bg-white rounded-3xl px-3 py-4 mb-4">
+      <div className="flex flex-wrap md:justify-between items-center gap-4 justify-center">
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="relative h-6 mx-3 w-20 min-w-[4.7rem]">
+            <Image fill src="/assets/membership-reward-icon.svg" alt="..." />
+          </div>
+          <div className="relative h-5 w-5 mx-3 min-w-[1.25rem] md:rotate-0 rotate-90">
+            <Image fill src="/assets/arrow-to-right-icon.svg" alt="..." />
+          </div>
+          <div className="relative h-6 mx-3 w-20 min-w-[4.7rem]">
+            <Image fill src="/assets/air-france-to-klm-icon.svg" alt="..." />
+          </div>
+        </div>
+
+        <div>
+          <h4 className="font-bold text-base">4,40,000 pts</h4>
+          <small className="text-xs font-normal text-[0.5rem]">+$205.00*</small>
+        </div>
+
+        <div className="w-full lg:w-full md:w-auto xl:w-auto">
+          <button className="w-full inline-flex items-center justify-center rounded-full bg-primary-500 px-7 py-3 text-sm font-bold text-white hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500">
+            Select Deal
+          </button>
+        </div>
+      </div>
+
+      {cardType !== 'other' && (
+        <div className="flex flex-wrap md:justify-between items-center justify-center">
+          <div className="bg-light rounded-2xl font-bold text-[0.63rem] p-2 inline-block mt-2">
+            Special offer: 25% Transfer Bonus
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
