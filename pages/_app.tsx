@@ -1,8 +1,10 @@
 import {Provider} from 'react-redux';
-import {store} from '@/store';
 import type {AppProps} from 'next/app';
 import {DefaultSeo} from 'next-seo';
+
 import {metaConstants} from '@/meta-constants';
+import Layout from '@/components/views/Layout';
+import {store} from '@/store';
 
 import 'swiper/swiper-bundle.min.css';
 import '../styles/rc-slider.css';
@@ -21,7 +23,9 @@ function MyApp({Component, pageProps}: AppProps) {
         title={metaConstants.SITE_NAME}
       />
       <Provider store={store}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </Provider>
     </>
   );

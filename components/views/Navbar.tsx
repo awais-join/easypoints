@@ -18,11 +18,10 @@ const navigation = [
 ];
 
 const morePages = [
-  {name: 'About us', href: '#'},
-  {name: 'Careers', href: 'careers'},
-  {name: 'Support', href: '#'},
-  {name: 'Press', href: '#'},
-  {name: 'Blog', href: '#'}
+  {name: 'Careers', href: '/careers'},
+  {name: 'Terms of use', href: '/terms-and-conditions'},
+  {name: 'Privacy policy', href: '/privacy-policy'},
+  {name: 'Become an affiliate', href: '/affiliation'}
 ];
 
 const Navbar = () => {
@@ -91,7 +90,7 @@ const Navbar = () => {
                 </Popover.Panel>
               </Transition>
             </Popover>
-            {router.pathname !== '/flight-search' ? (
+            {router.pathname !== '/profile-list' ? (
               <div className="flex gap-4">
                 <Link
                   href="/sign-up"

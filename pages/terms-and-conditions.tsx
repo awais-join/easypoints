@@ -3,7 +3,6 @@ import {NextPage} from 'next';
 import {NextSeo} from 'next-seo';
 import {metaConstants} from '@/meta-constants';
 import Container from '@/components/views/Container';
-import Layout from '@/components/views/Layout';
 
 interface TermsAndConditionsProps {}
 
@@ -166,33 +165,31 @@ const TermsAndConditions: NextPage<TermsAndConditionsProps> = () => {
   return (
     <>
       <NextSeo title={`Terms And Conditions | ${metaConstants.SITE_NAME}`} />
-      <Layout>
-        <h1 className="bg-light rounded-b-3xl text-6xl py-12 text-center text-black font-bold">
-          Terms And Conditions
-        </h1>
-        <Container>
-          <div className="my-14">
-            {termsList.map(term => (
-              <div key={Math.random().toString(26).slice(2)}>
-                {term.title && (
-                  <h3 className="text-2xl font-bold capitalize mb-4">
-                    {term.title}
-                  </h3>
-                )}
-                {term.description &&
-                  term.description.map(des => (
-                    <h4
-                      key={Math.random().toString(26).slice(2)}
-                      className="text-lg leading-normal text-black mb-4"
-                    >
-                      {des}
-                    </h4>
-                  ))}
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Layout>
+      <h1 className="bg-light rounded-b-3xl text-6xl py-12 text-center text-black font-bold">
+        Terms And Conditions
+      </h1>
+      <Container>
+        <div className="my-14">
+          {termsList.map(term => (
+            <div key={Math.random().toString(26).slice(2)}>
+              {term.title && (
+                <h3 className="text-2xl font-bold capitalize mb-4">
+                  {term.title}
+                </h3>
+              )}
+              {term.description &&
+                term.description.map(des => (
+                  <h4
+                    key={Math.random().toString(26).slice(2)}
+                    className="text-lg leading-normal text-black mb-4"
+                  >
+                    {des}
+                  </h4>
+                ))}
+            </div>
+          ))}
+        </div>
+      </Container>
     </>
   );
 };

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {NextPage} from 'next';
-import Layout from '@/components/views/Layout';
 import Container from '@/components/views/Container';
 import Image from 'next/image';
 import {useRouter} from 'next/router';
@@ -17,7 +16,7 @@ const CareerDetails: NextPage = ({}) => {
   return (
     <>
       {jobDetails.title && (
-        <Layout>
+        <>
           <div className="max-w-full mx-3 md:p-6 bg-light rounded-b-3xl">
             <section className="py-20">
               <Container>
@@ -137,7 +136,7 @@ const CareerDetails: NextPage = ({}) => {
               </Container>
             </section>
           </div>
-        </Layout>
+        </>
       )}
     </>
   );

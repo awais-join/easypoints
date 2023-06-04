@@ -3,7 +3,6 @@ import {NextPage} from 'next';
 import {NextSeo} from 'next-seo';
 import {metaConstants} from '@/meta-constants';
 import Container from '@/components/views/Container';
-import Layout from '@/components/views/Layout';
 import {Tab} from '@headlessui/react';
 import PersonalInfoPanel from '@/components/account-settings/panel/PersonalInfoPanel';
 import AccountSettingsTabs from '@/components/account-settings/tabs/AccountSettingTabs';
@@ -48,7 +47,6 @@ const AccountSettings: NextPage = () => {
   return (
     <>
       <NextSeo title={`Account Settings | ${metaConstants.SITE_NAME}`} />
-      <Layout>
         <div className="max-w-full mx-3 p-6 bg-light rounded-b-3xl">
           <section className="py-20">
             <Container>
@@ -107,7 +105,6 @@ const AccountSettings: NextPage = () => {
             </Container>
           </section>
         </div>
-      </Layout>
     </>
   );
 };

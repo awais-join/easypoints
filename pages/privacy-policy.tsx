@@ -3,7 +3,6 @@ import {NextPage} from 'next';
 import {NextSeo} from 'next-seo';
 import {metaConstants} from '@/meta-constants';
 import Container from '@/components/views/Container';
-import Layout from '@/components/views/Layout';
 
 interface PrivacyPolicyProps {}
 
@@ -59,7 +58,6 @@ const PrivacyPolicy: NextPage<PrivacyPolicyProps> = () => {
   return (
     <>
       <NextSeo title={`Privacy Policy | ${metaConstants.SITE_NAME}`} />
-      <Layout>
         <h1 className="bg-light rounded-b-3xl text-6xl py-12 text-center text-black font-bold">
           Privacy Policy
         </h1>
@@ -85,7 +83,6 @@ const PrivacyPolicy: NextPage<PrivacyPolicyProps> = () => {
             ))}
           </div>
         </Container>
-      </Layout>
     </>
   );
 };

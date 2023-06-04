@@ -1,6 +1,5 @@
 import React from 'react';
 import {NextPage} from 'next';
-import Layout from '@/components/views/Layout';
 import Container from '@/components/views/Container';
 import CareersCard from '@/components/cards/CareersCard';
 import CareersFilter from '@/components/careers/CareersFilter';
@@ -63,7 +62,7 @@ const Careers: NextPage = () => {
     }
   ];
   return (
-    <Layout>
+    <>
       <div className="max-w-full mx-3 p-6 bg-light rounded-b-3xl">
         <section className="py-20">
           <Container>
@@ -165,7 +164,7 @@ const Careers: NextPage = () => {
           </section>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

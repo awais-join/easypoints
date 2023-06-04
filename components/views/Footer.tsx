@@ -6,15 +6,15 @@ import {useRouter} from 'next/router';
 
 const navigation = [
   //   { name: "Home", href: "/" },
-  {name: 'Questions?', href: '/questions'},
-  {name: 'Our services & pricing', href: '/services'},
-  {name: 'Become an affiliate', href: '/affiliate'},
+  {name: 'Questions?', href: '/faqs'},
+  {name: 'Our services & pricing', href: '/pricing'},
+  {name: 'Become an affiliate', href: '/affiliation'},
   {name: 'Careers', href: '/careers'}
 ];
 
 const termsLinks = [
   {name: 'Earn more points', href: '/earn'},
-  {name: 'Terms of use', href: '/terms'},
+  {name: 'Terms of use', href: '/terms-and-conditions'},
   {name: 'Privacy policy', href: '/privacy-policy'}
 ];
 

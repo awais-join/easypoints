@@ -5,7 +5,6 @@ import {metaConstants} from '@/meta-constants';
 
 import Container from '@/components/views/Container';
 import FlightSearch from '@/components/inputs/FlightSearch';
-import Layout from '@/components/views/Layout';
 import BookCard from '@/components/cards/BookCard';
 import FilterCard from '@/components/cards/FilterCard';
 import BookingOptions from '@/components/modal/BookingOptions';
@@ -16,7 +15,6 @@ const FlightSearchPage: NextPage<FlightSearchProps> = () => {
   return (
     <>
       <NextSeo title={`Flight Search | ${metaConstants.SITE_NAME}`} />
-      <Layout>
         <div className="bg-light rounded-b-3xl mx-3">
           <FlightSearch />
         </div>
@@ -37,7 +35,6 @@ const FlightSearchPage: NextPage<FlightSearchProps> = () => {
           </Container>
           <BookingOptions />
         </section>
-      </Layout>
     </>
   );
 };

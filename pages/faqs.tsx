@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {NextPage} from 'next';
-import Layout from '@/components/views/Layout';
 import Container from '@/components/views/Container';
 import SearchForm from '@/components/faqs/SearchForm';
 import {ArrowSmallLeftIcon} from '@heroicons/react/24/outline';
@@ -119,7 +118,6 @@ const Faqs: NextPage = () => {
 
   return (
     <>
-      <Layout>
         <div className="max-w-full mx-3 p-6 bg-light rounded-b-3xl">
           <section className="py-20">
             <Container>
@@ -211,7 +209,6 @@ const Faqs: NextPage = () => {
             </div>
           </div>
         </div>
-      </Layout>
     </>
   );
 };
