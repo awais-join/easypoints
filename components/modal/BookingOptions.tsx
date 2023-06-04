@@ -294,7 +294,13 @@ const PointsDealListCard: FC<PointsDealListCardProps> = ({cardType}) => {
         </div>
 
         <div className="w-full lg:w-full md:w-auto xl:w-auto">
-          <button className="w-full inline-flex items-center justify-center rounded-full bg-primary-500 px-7 py-3 text-sm font-bold text-white hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500">
+          <button
+            className={`w-full inline-flex items-center justify-center rounded-full ${
+              cardType === 'other'
+                ? 'bg-light border border-primary-500 text-primary-500'
+                : 'bg-primary-500 text-white'
+            } px-7 py-3 text-sm hover:bg-primary-600 font-medium hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500`}
+          >
             Select Deal
           </button>
         </div>
