@@ -1,27 +1,36 @@
 import React, {useState} from 'react';
 import {useRouter} from 'next/router';
-import Container from '../views/Container';
+import Link from 'next/link';
 import Image from 'next/image';
 import {MagnifyingGlassIcon} from '@heroicons/react/24/outline';
+
 import CustomSelect from './CustomSelect';
+import Container from '../views/Container';
 
-const flightType = [
-  {name: 'One Way', value: 'one-way'},
-  {name: 'Two Way', value: 'one-way'}
-];
+const flightType = [{name: 'One Way', value: 'one-way'}];
 
-const flightClass = [
-  {name: '1 Adult, Economy', value: 'one-adult'},
-  {name: '2 Adults, Economy', value: 'two-adults'}
-];
+const flightClass = [{name: '1 Adult, Economy', value: 'one-adult-economy'}];
 
 const FlightPriceSection = () => {
   const {pathname} = useRouter();
 
   const [isSwitched, setIsSwitched] = useState(false);
 
-  const handleSwitch = () => {
-    setIsSwitched(!isSwitched);
+  const [searchQuery, setSearchQuery] = useState({
+    from: '',
+    to: '',
+    departDate: '',
+    roundTrip: false,
+    flightClass: 'one-adult-economy'
+  });
+
+  const handleChange = (e: any) => {
+    const {name, value} = e.target;
+
+    let updatedQueryObj: any = {...searchQuery};
+    updatedQueryObj[name] = value;
+
+    setSearchQuery(updatedQueryObj);
   };
 
   return (
@@ -54,15 +63,18 @@ const FlightPriceSection = () => {
                     </span>
                     <input
                       className="w-full text-lg border-0 focus:ring-0 bg-transparent placeholder:text-black50"
-                      type="text"
                       placeholder="Where to?"
+                      type="text"
+                      name="to"
+                      value={searchQuery.to}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="border-t lg:border-l border-lightGray relative mx-8">
                     <button
                       type="button"
                       className="swap-button absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 active:scale-105"
-                      onClick={handleSwitch}
+                      onClick={() => setIsSwitched(!isSwitched)}
                     >
                       <span className="h-7 w-7 relative block">
                         <Image fill src="/assets/swap-icon.svg" alt="..." />
@@ -79,8 +91,11 @@ const FlightPriceSection = () => {
                     </span>
                     <input
                       className="w-full text-lg border-0 focus:ring-0 bg-transparent placeholder:text-black50"
-                      type="text"
                       placeholder="Where from?"
+                      type="text"
+                      name="from"
+                      value={searchQuery.from}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -88,25 +103,32 @@ const FlightPriceSection = () => {
                   <input
                     className="w-full text-lg border-0 focus:ring-0 bg-transparent placeholder:text-black50"
                     type="date"
-                    name="date-return"
-                    id="date-return"
+                    name="departDate"
+                    value={searchQuery.departDate}
+                    onChange={handleChange}
                   />
-                  <div className="border-t lg:border-l border-lightGray relative mx-8" />
+
+                  {/* will use later  */}
+
+                  {/* <div className="border-t lg:border-l border-lightGray relative mx-8" />
                   <input
                     className="w-full text-lg border-0 focus:ring-0 bg-transparent placeholder:text-black50"
                     type="date"
                     name="return"
                     id="return"
                     placeholder="Return"
-                  />
+                  /> */}
                 </div>
-                <button
-                  type="submit"
+                <Link
                   className="flex gap-2 items-center justify-center rounded-full bg-primary-500 px-8 py-4 text-base font-medium text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+                  href={{
+                    pathname: '/flight-search',
+                    query: searchQuery
+                  }}
                 >
                   <MagnifyingGlassIcon className="h-6 w-6 min-w-[1.5rem]" />
-                  <span>Search</span>
-                </button>
+                  Search
+                </Link>
               </div>
             </form>
           </div>
