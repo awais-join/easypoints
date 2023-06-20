@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const CareerDetails: NextPage = ({}) => {
   const router = useRouter();
-  var jobDetails = router.query;
+  const jobDetails = router.query;
 
   if (router.isReady && !jobDetails.title) {
     router.push('/careers');

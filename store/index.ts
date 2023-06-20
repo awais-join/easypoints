@@ -1,10 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './features/counterSlice';
+import {configureStore} from '@reduxjs/toolkit';
+import {FlightFareReducer, flightFeature} from '@/store/features/flight/flight.feature';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
-  },
+    flightResponse: FlightFareReducer
+  }
 });
 
 export type RootState = ReturnType<typeof store.getState>;

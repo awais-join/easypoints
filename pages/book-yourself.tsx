@@ -215,8 +215,8 @@ const BookYourself = () => {
                 BOOK IT YOURSELF
               </h5>
               <p className="flex items-center text-black75 text-base font-normal mb-7 gap-2 lg:mt-0 mt-6">
-                Booking award flights can sometimes be clunky, but we're here to
-                help! We'll walk you through the steps.
+                Booking award flights can sometimes be clunky, but we&apos;re here to
+                help! We&apos;ll walk you through the steps.
               </p>
               <div className="flex justify-between gap-4 sm:gap-0 sm:flex-row flex-col items-center text-base font-bold mb-4 bg-white rounded-2xl py-2 px-4">
                 <span className="flex items-center gap-2">

@@ -20,6 +20,8 @@ module.exports = {
         yellow: '#FCD53A',
         blue: '#1C5CFF',
         lightPink: '#CF95FB',
+        lightBlue: '#F6F9FF',
+        darkBlue: '#E1E8F5',
         primary: {
           DEFAULT: '#048EFF',
           50: '#BCE1FF',

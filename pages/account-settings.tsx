@@ -69,6 +69,7 @@ const AccountSettings: NextPage = () => {
                     <Tab.List className="lg:flex-shrink-0 mb-4  px-2 lg:basis-[35%] grow ">
                       {tabs.map((tab: any, index) => (
                         <Tab
+                            key={index}
                           className={({selected}) =>
                             classNames(
                               'w-full rounded-xl',

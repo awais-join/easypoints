@@ -7,6 +7,7 @@ RUN npm ci
 
 FROM node:16-alpine AS builder
 WORKDIR /app
+# certbot, pipeline
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
@@ -15,7 +16,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 ARG environment=production
 ENV NODE_ENV=$environment
 
-RUN yarn build
+RUN npm run build
 
 FROM node:16-alpine AS runner
 WORKDIR /app

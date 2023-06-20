@@ -223,8 +223,8 @@ const BookingOptions = () => {
                               className="h-4 w-4 min-w-[1rem] text-black75 ml-3"
                             />
                           </h5>
-                          {[1, 2].map(() => (
-                            <PointsDealListCard cardType={'easypoints'} />
+                          {[1, 2].map((number) => (
+                            <PointsDealListCard key={number} cardType={'easypoints'} />
                           ))}
                         </div>
                       </div>
@@ -234,8 +234,8 @@ const BookingOptions = () => {
                           <h5 className="flex items-center text-sm font-bold mb-4">
                             Transfer points from a credit card:
                           </h5>
-                          {[1, 2, 3, 4, 5, 6].map(() => (
-                            <PointsDealListCard cardType={'other'} />
+                          {[1, 2, 3, 4, 5, 6].map((number) => (
+                            <PointsDealListCard key={number} cardType={'other'} />
                           ))}
                         </div>
                       </div>
@@ -245,8 +245,8 @@ const BookingOptions = () => {
                           <h5 className="flex items-center text-sm font-bold mb-4">
                             Explore other programs:
                           </h5>
-                          {[1, 2].map(() => (
-                            <PointsDealListCard cardType={'other'} />
+                          {[1, 2].map((number) => (
+                            <PointsDealListCard key={number} cardType={'other'} />
                           ))}
 
                           <h5 className="flex items-center text-sm font-bold mb-4">

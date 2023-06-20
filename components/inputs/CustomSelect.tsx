@@ -17,7 +17,7 @@ interface CustomSelectProps {
 }
 
 export default function CustomSelect({list, placeholder}: CustomSelectProps) {
-  const [selected, setSelected] = useState<ListItem>(
+  const [selected, setSelected] = useState<ListItem | null>(
     placeholder ? null : list[0]
   );
 
@@ -61,8 +61,8 @@ export default function CustomSelect({list, placeholder}: CustomSelectProps) {
                           ? 'bg-primary-500/10 border-primary-500 text-black'
                           : 'text-black border-transparent',
                         'relative cursor-default select-none p-2 rounded-lg border-2',
-                        selected &&
-                          'bg-primary-500/10 border-primary-500 text-black'
+                        selected ?
+                          'bg-primary-500/10 border-primary-500 text-black' : ''
                       )
                     }
                     value={item}

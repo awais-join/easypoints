@@ -78,8 +78,8 @@ function BillingPanel() {
               <table className="table-auto">
                 <thead className="border-b py-5">
                   <tr>
-                    {headings.map(head => (
-                      <th>
+                    {headings.map((head, index) => (
+                      <th key={index}>
                         <div className="flex flex-wrap items-center py-4 gap-1 md:gap-2">
                           <div className="w-auto ">
                             <p className=" font-sans font-semibold text-sm md:text-base leading-relaxed text-[#718096]">
@@ -103,8 +103,8 @@ function BillingPanel() {
                   </tr>
                 </thead>
                 <tbody>
-                  {billingData.map(data => (
-                    <tr className="border-b align-top font-sans text-sm md:text-base leading-relaxed text-[#434749] ">
+                  {billingData.map((data, index) => (
+                    <tr key={index} className="border-b align-top font-sans text-sm md:text-base leading-relaxed text-[#434749] ">
                       <td className="py-4 align-top md:align-middle">
                         {data.Receipts}
                       </td>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {SyntheticEvent, useState} from 'react';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -6,31 +6,43 @@ import {MagnifyingGlassIcon} from '@heroicons/react/24/outline';
 
 import CustomSelect from './CustomSelect';
 import Container from '../views/Container';
+import Select from 'react-select/base';
+import {useAppSelector} from '@/store/hooks';
+import {getAirports} from '@/store/features/flight/flight.feature';
+import {Airport} from '@/store/features/flight/flights';
 
 const flightType = [{name: 'One Way', value: 'one-way'}];
 
 const flightClass = [{name: '1 Adult, Economy', value: 'one-adult-economy'}];
 
+interface SearchQueryParams {
+  from: Airport | null;
+  to: Airport | null;
+  departureDate: string | null;
+  roundTrip: boolean;
+  flightClass: string | null;
+}
+
 const FlightPriceSection = () => {
+  const airports = useAppSelector(getAirports);
   const {pathname} = useRouter();
 
   const [isSwitched, setIsSwitched] = useState(false);
-
-  const [searchQuery, setSearchQuery] = useState({
-    from: '',
-    to: '',
-    departDate: '',
+  const [searchQuery, setSearchQuery] = useState<SearchQueryParams>({
+    from: null,
+    to: null,
+    departureDate: null,
     roundTrip: false,
-    flightClass: 'one-adult-economy'
+    flightClass: null
   });
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>('');
 
-  const handleChange = (e: any) => {
-    const {name, value} = e.target;
-
-    let updatedQueryObj: any = {...searchQuery};
-    updatedQueryObj[name] = value;
-
-    setSearchQuery(updatedQueryObj);
+  const handleChange = (
+    name: keyof SearchQueryParams,
+    value: SearchQueryParams[typeof name]
+  ) => {
+    setSearchQuery({...searchQuery, [name]: value});
   };
 
   return (
@@ -66,8 +78,8 @@ const FlightPriceSection = () => {
                       placeholder="Where to?"
                       type="text"
                       name="to"
-                      value={searchQuery.to}
-                      onChange={handleChange}
+                      // value={searchQuery.to}
+                      // onChange={handleChange}
                     />
                   </div>
                   <div className="border-t lg:border-l border-lightGray relative mx-8">
@@ -94,8 +106,8 @@ const FlightPriceSection = () => {
                       placeholder="Where from?"
                       type="text"
                       name="from"
-                      value={searchQuery.from}
-                      onChange={handleChange}
+                      // value={searchQuery.from}
+                      // onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -104,8 +116,8 @@ const FlightPriceSection = () => {
                     className="w-full text-lg border-0 focus:ring-0 bg-transparent placeholder:text-black50"
                     type="date"
                     name="departDate"
-                    value={searchQuery.departDate}
-                    onChange={handleChange}
+                    // value={searchQuery.departDate}
+                    // onChange={handleChange}
                   />
 
                   {/* will use later  */}
@@ -122,8 +134,8 @@ const FlightPriceSection = () => {
                 <Link
                   className="flex gap-2 items-center justify-center rounded-full bg-primary-500 px-8 py-4 text-base font-medium text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
                   href={{
-                    pathname: '/flight-search',
-                    query: searchQuery
+                    pathname: '/flight-search'
+                    // query: searchQuery
                   }}
                 >
                   <MagnifyingGlassIcon className="h-6 w-6 min-w-[1.5rem]" />
