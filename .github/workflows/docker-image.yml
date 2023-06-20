@@ -12,6 +12,48 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Log in to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build, tag, and push image to Amazon ECR
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: easypoints-frontend
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build . -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: easypoints-frontend
+        IMAGE_TAG: ${{ github.sha }}
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS ----password-stdin 065129156004.dkr.ecr.region.amazonaws.com
+          docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          imageid=$(docker inspect --format='{{.Image}}' easypoints-container | awk -F':' '{print $2}')
+          docker stop easypoints-container
+          docker rm easypoints-container
+          docker create -it --name easypoints-container -p "3000:3000" $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker run easypoints-container
+
+    - name: Log out of Amazon ECR
+      if: always()
+      run: docker logout ${{ steps.login-ecr.outputs.registry }}
       
