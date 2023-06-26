@@ -1,0 +1,29 @@
+.mainContainer {
+  position: relative;
+
+  .airportsContainer {
+    position: absolute;
+    width: 600px;
+    max-width: 90vw;
+    max-height: 500px;
+    overflow-y: auto;
+    height: 500px;
+    //background-color: white;
+    border-radius: 10px;
+    top: 60px;
+    padding: 1rem;
+    background-color: red;
+
+    ul {
+      list-style-type: none;
+      box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+      padding: 1rem;
+      border-radius: 10px;
+
+      li {
+        padding: .5rem;
+        cursor: pointer;
+      }
+    }
+  }
+}

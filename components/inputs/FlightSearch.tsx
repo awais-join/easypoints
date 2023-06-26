@@ -1,15 +1,15 @@
-import React, {SyntheticEvent, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 import {MagnifyingGlassIcon} from '@heroicons/react/24/outline';
-
+import styles from './FlightSearch.module.scss';
 import CustomSelect from './CustomSelect';
 import Container from '../views/Container';
-import Select from 'react-select/base';
 import {useAppSelector} from '@/store/hooks';
 import {getAirports} from '@/store/features/flight/flight.feature';
 import {Airport} from '@/store/features/flight/flights';
+import Fuse from 'fuse.js';
 
 const flightType = [{name: 'One Way', value: 'one-way'}];
 
@@ -27,23 +27,67 @@ const FlightPriceSection = () => {
   const airports = useAppSelector(getAirports);
   const {pathname} = useRouter();
 
+  const [normalizedAirports, setNormalizedAirports] = useState<{
+    code: string;
+    airport: Airport;
+  } | null>(null);
   const [isSwitched, setIsSwitched] = useState(false);
-  const [searchQuery, setSearchQuery] = useState<SearchQueryParams>({
-    from: null,
-    to: null,
-    departureDate: null,
-    roundTrip: false,
-    flightClass: null
+  const [active, setActive] = useState<'FROM' | 'TO' | null>(null);
+  const [searchValues, setSearchValues] = useState<{
+    from: string;
+    to: string;
+    departureDate: string;
+    flightClass: string;
+    roundTrip: string;
+  }>({
+    from: '',
+    to: '',
+    departureDate: '',
+    flightClass: '',
+    roundTrip: ''
   });
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>('');
+  const [searchedAirports, setSearchedAirports] = useState<Airport[]>([]);
 
-  const handleChange = (
-    name: keyof SearchQueryParams,
-    value: SearchQueryParams[typeof name]
-  ) => {
-    setSearchQuery({...searchQuery, [name]: value});
+  useEffect(() => {
+    if (Array.isArray(airports)) {
+      const normalized: any = {};
+      airports.forEach(airport => {
+        normalized[airport.code] = airport;
+      });
+      setNormalizedAirports(normalized);
+    }
+  }, [airports]);
+
+  const searchForAirports = (value: string) => {
+    const fuse = new Fuse(airports, {
+      shouldSort: true,
+      keys: [
+        'airportCode',
+        'code',
+        'airportName',
+        'countryCode',
+        'countryName',
+        'country',
+        'cityName',
+        'city'
+      ]
+    });
+    return fuse.search(value).map(({item}) => item);
   };
+
+  useEffect(() => {
+    if (searchValues.from) {
+      setActive('FROM');
+      setSearchedAirports(searchForAirports(searchValues.from));
+    }
+  }, [searchValues.from]);
+
+  useEffect(() => {
+    if (searchValues.to) {
+      setActive('TO');
+      setSearchedAirports(searchForAirports(searchValues.to));
+    }
+  }, [searchValues.to]);
 
   return (
     <section className="pb-8 lg:pb-0 pt-6 md:pt-12">
@@ -64,7 +108,9 @@ const FlightPriceSection = () => {
             </div>
             <form>
               <div className="flex flex-col 2xl:flex-row gap-6">
-                <div className="border border-lightGray rounded-3xl lg:rounded-full px-4 py-2 flex flex-col lg:flex-row gap-4 lg:gap-0">
+                <div
+                  className={`border border-lightGray rounded-3xl lg:rounded-full px-4 py-2 flex flex-col lg:flex-row gap-4 lg:gap-0 ${styles.mainContainer}`}
+                >
                   <div
                     className={`flex items-center flex-1 ${
                       isSwitched ? 'order-first' : 'order-last'
@@ -78,8 +124,16 @@ const FlightPriceSection = () => {
                       placeholder="Where to?"
                       type="text"
                       name="to"
-                      // value={searchQuery.to}
-                      // onChange={handleChange}
+                      onBlur={() => {
+                        setSearchedAirports([]);
+                      }}
+                      value={searchValues.to}
+                      onChange={e => {
+                        setSearchValues({
+                          ...searchValues,
+                          to: e.target.value
+                        });
+                      }}
                     />
                   </div>
                   <div className="border-t lg:border-l border-lightGray relative mx-8">
@@ -106,18 +160,63 @@ const FlightPriceSection = () => {
                       placeholder="Where from?"
                       type="text"
                       name="from"
-                      // value={searchQuery.from}
-                      // onChange={handleChange}
+                      value={searchValues.from}
+                      onBlur={() => {
+                        setSearchedAirports([]);
+                      }}
+                      onChange={e => {
+                        setSearchValues({
+                          ...searchValues,
+                          from: e.target.value
+                        });
+                      }}
                     />
                   </div>
+                  <div className={styles.airportsContainer}></div>
+                  {searchedAirports.length > 0 ? (
+                    <div className={styles.airportsContainer}>
+                      <ul>
+                        {(searchedAirports.length > 200
+                          ? searchedAirports.slice(0, 199)
+                          : searchedAirports
+                        ).map(value => {
+                          return (
+                            <li className="hover:bg-primary hover:text-white rounded-lg"
+                              key={value.code}
+                              onClick={() => {
+                                if (active === 'TO') {
+                                  setSearchValues({
+                                    ...searchValues,
+                                    to: value.airportName
+                                  });
+                                } else if (active === 'FROM') {
+                                  setSearchValues({
+                                    ...searchValues,
+                                    from: value.airportName
+                                  });
+                                }
+                              }}
+                            >
+                              {value.airportName}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  ) : null}
                 </div>
                 <div className="border border-lightGray rounded-3xl lg:rounded-full px-4 py-2 flex flex-col lg:flex-row gap-4 lg:gap-0">
                   <input
                     className="w-full text-lg border-0 focus:ring-0 bg-transparent placeholder:text-black50"
                     type="date"
                     name="departDate"
-                    // value={searchQuery.departDate}
-                    // onChange={handleChange}
+                    value={searchValues.departureDate}
+                    onChange={e => {
+                      setSearchValues({
+                        ...searchValues,
+                        departureDate: e.target.value
+                      });
+                    }}
                   />
 
                   {/* will use later  */}
