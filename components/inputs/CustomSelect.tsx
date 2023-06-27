@@ -25,16 +25,16 @@ export default function CustomSelect({list, placeholder}: CustomSelectProps) {
     <Listbox value={selected} onChange={setSelected}>
       {({open}) => (
         <>
-          <div className="relative">
+          <div>
             <Listbox.Button
-              className={`relative w-full cursor-pointer rounded-full bg-white py-2 pl-4 pr-10 text-left text-black shadow-sm ring-1 ring-inset ring-gray-200 focus:outline-none sm:text-sm sm:leading-6 ${
+              className={`w-full flex cursor-pointer rounded-full bg-white py-2 pl-4 pr-4 text-left text-black shadow-sm ring-1 ring-inset ring-gray-200 focus:outline-none sm:text-sm sm:leading-6 ${
                 open && 'ring-2 ring-primary-500'
               }`}
             >
               <span className="block truncate text-base">
                 {selected ? selected.name : placeholder}
               </span>
-              <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+              <span className="pointer-events-none flex items-center">
                 <ChevronDownIcon
                   className={`h-6 w-6 text-black75 transition-all duration-300 ${
                     open && 'rotate-180'

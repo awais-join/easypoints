@@ -13,12 +13,12 @@ const Dropdown: React.FC<DropdownProps> = ({title, children}) => {
       {({open}) => (
         <>
           <Popover.Button
-            className={`relative w-full flex items-center gap-2 cursor-pointer rounded-full bg-white py-2 pl-4 pr-10 text-left text-black shadow-sm ring-1 ring-inset ring-gray-200 focus:outline-none sm:text-sm sm:leading-6 ${
+            className={`w-full flex items-center gap-2 cursor-pointer rounded-full bg-white py-2 pl-4 pr-4 text-left text-black shadow-sm ring-1 ring-inset ring-gray-200 focus:outline-none sm:text-sm sm:leading-6 ${
               open && 'ring-2 ring-primary-500'
             }`}
           >
-            <span className="block truncate text-base">{title}</span>
-            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+            <span className="block truncate text-base mr-auto">{title}</span>
+            <span className="pointer-events-none flex items-center">
               <ChevronDownIcon
                 className={`h-6 w-6 text-black75 transition-all duration-300 ${
                   open && 'rotate-180'
