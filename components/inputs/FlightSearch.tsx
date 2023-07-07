@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -6,57 +6,67 @@ import {MagnifyingGlassIcon} from '@heroicons/react/24/outline';
 import styles from './FlightSearch.module.scss';
 import CustomSelect from './CustomSelect';
 import Container from '../views/Container';
-import {useAppSelector} from '@/store/hooks';
-import {getAirports} from '@/store/features/flight/flight.feature';
-import {Airport} from '@/store/features/flight/flights';
+import {useAppDispatch, useAppSelector} from '@/store/hooks';
+import {
+  addToResponse,
+  getAirports
+} from '@/store/features/flight/flight.feature';
+import {Airport, Response} from '@/store/features/flight/flights';
 import Fuse from 'fuse.js';
+import {Autocomplete} from '@mui/material';
+import {
+  ListboxComponent,
+  StyledPopper
+} from '@/components/inputs/autocomplete.component';
+import {API} from '@/utils/axios.service';
 
 const flightType = [{name: 'One Way', value: 'one-way'}];
 
 const flightClass = [{name: '1 Adult, Economy', value: 'one-adult-economy'}];
 
-interface SearchQueryParams {
-  from: Airport | null;
-  to: Airport | null;
-  departureDate: string | null;
-  roundTrip: boolean;
-  flightClass: string | null;
-}
+const airlinesCodes = [
+  'aa',
+  // 'etihadGuest',
+  // 'southwest',
+  // 'virginAustralia',
+  // 'virginAtlantic',
+  // 'jetBlue',
+  // 'airCanada',
+  // 'alaska',
+  // 'delta',
+  // 'united',
+  // 'asiana',
+  // 'qantas',
+  // 'korean',
+  // 'lifemiles',
+  // 'aeromexico',
+  // 'emirates',
+  // 'asiaMiles',
+  // 'iberia',
+  // 'british',
+  // 'hawaiian'
+];
 
 const FlightPriceSection = () => {
+  const dispatch = useAppDispatch();
+
   const airports = useAppSelector(getAirports);
   const {pathname} = useRouter();
 
-  const [normalizedAirports, setNormalizedAirports] = useState<{
-    code: string;
-    airport: Airport;
-  } | null>(null);
   const [isSwitched, setIsSwitched] = useState(false);
-  const [active, setActive] = useState<'FROM' | 'TO' | null>(null);
   const [searchValues, setSearchValues] = useState<{
-    from: string;
-    to: string;
+    from: Airport | null;
+    to: Airport | null;
     departureDate: string;
     flightClass: string;
     roundTrip: string;
   }>({
-    from: '',
-    to: '',
+    from: null,
+    to: null,
     departureDate: '',
     flightClass: '',
     roundTrip: ''
   });
-  const [searchedAirports, setSearchedAirports] = useState<Airport[]>([]);
-
-  useEffect(() => {
-    if (Array.isArray(airports)) {
-      const normalized: any = {};
-      airports.forEach(airport => {
-        normalized[airport.code] = airport;
-      });
-      setNormalizedAirports(normalized);
-    }
-  }, [airports]);
 
   const searchForAirports = (value: string) => {
     const fuse = new Fuse(airports, {
@@ -75,19 +85,21 @@ const FlightPriceSection = () => {
     return fuse.search(value).map(({item}) => item);
   };
 
-  useEffect(() => {
-    if (searchValues.from) {
-      setActive('FROM');
-      setSearchedAirports(searchForAirports(searchValues.from));
-    }
-  }, [searchValues.from]);
-
-  useEffect(() => {
-    if (searchValues.to) {
-      setActive('TO');
-      setSearchedAirports(searchForAirports(searchValues.to));
-    }
-  }, [searchValues.to]);
+  const search = () => {
+    airlinesCodes
+      .map(id => {
+        return API.get(
+          `results/${id}?origin=${searchValues.from?.airportCode}&destination=${searchValues.to?.airportCode}&departureDate=${searchValues.departureDate}`
+        );
+      })
+      .forEach(promise => {
+        promise.then((response: Response) => {
+          if (response && Array.isArray(response.result)) {
+            dispatch(addToResponse(response.result));
+          }
+        });
+      });
+  };
 
   return (
     <section className="pb-8 lg:pb-0 pt-6 md:pt-12">
@@ -111,31 +123,38 @@ const FlightPriceSection = () => {
                 <div
                   className={`border border-lightGray rounded-3xl lg:rounded-full px-4 py-2 flex flex-col lg:flex-row gap-4 lg:gap-0 ${styles.mainContainer}`}
                 >
-                  <div
-                    className={`flex items-center flex-1 ${
-                      isSwitched ? 'order-first' : 'order-last'
-                    }`}
-                  >
-                    <span className="h-8 w-8 min-w-[2rem] relative block mr-2">
-                      <Image fill src="/assets/flight-to.svg" alt="..." />
-                    </span>
-                    <input
-                      className="w-full text-lg border-0 focus:ring-0 bg-transparent placeholder:text-black50"
-                      placeholder="Where to?"
-                      type="text"
-                      name="to"
-                      onBlur={() => {
-                        setSearchedAirports([]);
-                      }}
-                      value={searchValues.to}
-                      onChange={e => {
-                        setSearchValues({
-                          ...searchValues,
-                          to: e.target.value
-                        });
-                      }}
-                    />
-                  </div>
+                  <Autocomplete
+                    onChange={(_, value) => {
+                      setSearchValues({...searchValues, to: value});
+                    }}
+                    value={searchValues.to}
+                    sx={{width: 300}}
+                    PopperComponent={StyledPopper}
+                    ListboxComponent={ListboxComponent}
+                    options={airports}
+                    renderInput={params => {
+                      return (
+                        <div
+                          className={`flex items-center flex-1 ${
+                            isSwitched ? 'order-first' : 'order-last'
+                          }`}
+                          ref={params.InputProps.ref}
+                        >
+                          <span className="h-8 w-8 min-w-[2rem] relative block mr-2">
+                            <Image fill src="/assets/flight-to.svg" alt="..." />
+                          </span>
+                          <input
+                            {...params.inputProps}
+                            className="w-full text-lg border-0 focus:ring-0 bg-transparent placeholder:text-black50"
+                            placeholder="Where to?"
+                            type="text"
+                            name="to"
+                          />
+                        </div>
+                      );
+                    }}
+                    getOptionLabel={e => e.airportName}
+                  />
                   <div className="border-t lg:border-l border-lightGray relative mx-8">
                     <button
                       type="button"
@@ -147,63 +166,43 @@ const FlightPriceSection = () => {
                       </span>
                     </button>
                   </div>
-                  <div
-                    className={`flex items-center flex-1 ${
-                      isSwitched ? 'order-last' : 'order-first'
-                    }`}
-                  >
-                    <span className="h-8 w-8 min-w-[2rem] relative block mr-2">
-                      <Image fill src="/assets/flight-from.svg" alt="..." />
-                    </span>
-                    <input
-                      className="w-full text-lg border-0 focus:ring-0 bg-transparent placeholder:text-black50"
-                      placeholder="Where from?"
-                      type="text"
-                      name="from"
-                      value={searchValues.from}
-                      onBlur={() => {
-                        setSearchedAirports([]);
-                      }}
-                      onChange={e => {
-                        setSearchValues({
-                          ...searchValues,
-                          from: e.target.value
-                        });
-                      }}
-                    />
-                  </div>
-                  <div className={styles.airportsContainer}></div>
-                  {searchedAirports.length > 0 ? (
-                    <div className={styles.airportsContainer}>
-                      <ul>
-                        {(searchedAirports.length > 200
-                          ? searchedAirports.slice(0, 199)
-                          : searchedAirports
-                        ).map(value => {
-                          return (
-                            <li className="hover:bg-primary hover:text-white rounded-lg"
-                              key={value.code}
-                              onClick={() => {
-                                if (active === 'TO') {
-                                  setSearchValues({
-                                    ...searchValues,
-                                    to: value.airportName
-                                  });
-                                } else if (active === 'FROM') {
-                                  setSearchValues({
-                                    ...searchValues,
-                                    from: value.airportName
-                                  });
-                                }
-                              }}
-                            >
-                              {value.airportName}
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  ) : null}
+                  <Autocomplete
+                    value={searchValues.from}
+                    onChange={(_, value) => {
+                      setSearchValues({...searchValues, from: value});
+                    }}
+                    sx={{width: 300}}
+                    disableListWrap
+                    PopperComponent={StyledPopper}
+                    ListboxComponent={ListboxComponent}
+                    options={airports}
+                    renderInput={params => {
+                      return (
+                        <div
+                          className={`flex items-center flex-1 ${
+                            isSwitched ? 'order-last' : 'order-first'
+                          }`}
+                          ref={params.InputProps.ref}
+                        >
+                          <span className="h-8 w-8 min-w-[2rem] relative block mr-2">
+                            <Image
+                              fill
+                              src="/assets/flight-from.svg"
+                              alt="..."
+                            />
+                          </span>
+                          <input
+                            {...params.inputProps}
+                            className="w-full text-lg border-0 focus:ring-0 bg-transparent placeholder:text-black50"
+                            placeholder="Where from?"
+                            type="text"
+                            name="from"
+                          />
+                        </div>
+                      );
+                    }}
+                    getOptionLabel={e => e.airportName}
+                  />
                 </div>
                 <div className="border border-lightGray rounded-3xl lg:rounded-full px-4 py-2 flex flex-col lg:flex-row gap-4 lg:gap-0">
                   <input
@@ -231,6 +230,7 @@ const FlightPriceSection = () => {
                   /> */}
                 </div>
                 <Link
+                  onClick={search}
                   className="flex gap-2 items-center justify-center rounded-full bg-primary-500 px-8 py-4 text-base font-medium text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
                   href={{
                     pathname: '/flight-search'

@@ -44,6 +44,11 @@ export interface UnifiedFlightResponse {
   flightFares: UnifiedFlightFare[];
 }
 
+export interface Response {
+  result: UnifiedFlightResponse[];
+  logLines: string[];
+}
+
 export interface Airport {
   airportCode: string;
   code: string;

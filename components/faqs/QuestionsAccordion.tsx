@@ -3,7 +3,6 @@ import {Disclosure, Transition} from '@headlessui/react';
 import {MinusSmallIcon, PlusSmallIcon} from '@heroicons/react/24/outline';
 
 const QuestionsAccordion = (props: any) => {
-  console.log(props.faqs);
   const questions = props.faqs.questions;
   const answers = props.faqs.answers;
   let index = 0;
