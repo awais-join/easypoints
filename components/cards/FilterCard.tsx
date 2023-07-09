@@ -145,7 +145,7 @@ const FilterCard: React.FC<FilterCardProps> = ({
                           if (name) {
                             setSelectedFlights(airlines.map(item => item.name));
                           } else {
-                            setSelectedFlights(['']);
+                            setSelectedFlights([]);
                           }
                         }}
                         className={classNames(
