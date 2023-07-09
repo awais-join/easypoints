@@ -1,4 +1,4 @@
-import {Fragment, useState} from 'react';
+import {Fragment, useState,useEffect,Dispatch} from 'react';
 import {Listbox, Transition} from '@headlessui/react';
 import {ChevronDownIcon} from '@heroicons/react/20/solid';
 
@@ -14,12 +14,19 @@ interface ListItem {
 interface CustomSelectProps {
   list: ListItem[];
   placeholder?: string;
+  selected: ListItem;
+  setSelected:Dispatch<SetStateAction<ListItem>>
 }
 
-export default function CustomSelect({list, placeholder}: CustomSelectProps) {
-  const [selected, setSelected] = useState<ListItem | null>(
-    placeholder ? null : list[0]
-  );
+export default function CustomSelect({list, placeholder , selected, setSelected}: CustomSelectProps) {
+  // const [selected, setSelected] = useState<ListItem | null>(
+  //   placeholder ? null : list[0]
+  // );
+
+  useEffect(() => {
+    //setSelected(placeholder ? null : list[0])
+  }, [selected])
+  
 
   return (
     <Listbox value={selected} onChange={setSelected}>

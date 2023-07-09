@@ -25,26 +25,26 @@ const flightType = [{name: 'One Way', value: 'one-way'}];
 const flightClass = [{name: '1 Adult, Economy', value: 'one-adult-economy'}];
 
 const airlinesCodes = [
-  'aa',
-  // 'etihadGuest',
-  // 'southwest',
-  // 'virginAustralia',
-  // 'virginAtlantic',
-  // 'jetBlue',
-  // 'airCanada',
-  // 'alaska',
-  // 'delta',
-  // 'united',
-  // 'asiana',
-  // 'qantas',
-  // 'korean',
-  // 'lifemiles',
-  // 'aeromexico',
-  // 'emirates',
-  // 'asiaMiles',
-  // 'iberia',
-  // 'british',
-  // 'hawaiian'
+  {value: 'aa', name: 'American Air'},
+  // {value: 'etihadGuest', name: 'Etihad Airways'},
+  // {value: 'virginAustralia', name: 'Virgin Australia'},
+  // {value: 'southwest', name: 'Southwest Airlines'},
+  // {value: 'virginAtlantic', name: 'Virgin Atlantic'},
+  // {value: 'jetBlue', name: 'JetBlue'},
+  // {value: 'alaska', name: 'Alaska Air'},
+  // {value: 'airCanada', name: 'Air Canada'},
+  // {value: 'delta', name: 'Delta Air Lines'},
+  // {value: 'united', name: 'United Airlines'},
+  // {value: 'asiana', name: 'Asiana Airlines'},
+  // {value: 'qantas', name: 'Qantas Airline'},
+  // {value: 'korean', name: 'Korean Air'},
+  // {value: 'lifemiles', name: 'LifeMiles Airline'},
+  // {value: 'aeromexico', name: 'Aeroméxico Airline'},
+  // {value: 'emirates', name: 'Emirates Airline'},
+  // {value: 'asiaMiles', name: 'Asia Miles'},
+  // {value: 'iberia', name: 'Iberia Airline'},
+  // {value: 'british', name: 'British Airways'},
+  // {value: 'hawaiian', name: 'Hawaiian Airlines'}
 ];
 
 const FlightPriceSection = () => {
@@ -87,15 +87,32 @@ const FlightPriceSection = () => {
 
   const search = () => {
     airlinesCodes
-      .map(id => {
-        return API.get(
-          `results/${id}?origin=${searchValues.from?.airportCode}&destination=${searchValues.to?.airportCode}&departureDate=${searchValues.departureDate}`
-        );
+      .map( airline => {
+        return { promiseResult: API.get(
+          `results/${airline.value}?origin=${searchValues.from?.airportCode}&destination=${searchValues.to?.airportCode}&departureDate=${searchValues.departureDate}`
+        ), metaData: airline}
       })
       .forEach(promise => {
-        promise.then((response: Response) => {
+        promise.promiseResult.then((response: Response) => {
           if (response && Array.isArray(response.result)) {
-            dispatch(addToResponse(response.result));
+            const dataTosend = response.result.map(item => {
+              return {
+                imageUrl: `${promise.metaData.value}.png`,
+                airlineName: promise.metaData.name,
+                departure: item.departure,
+                arrivalTime: item.arrivalTime,
+                duration: item.duration,
+                origin: item.origin,
+                destination: item.destination,
+                flightNumber: item.flightNumber,
+                operatedBy: item.operatedBy,
+                aircraft: item.aircraft,
+                haveConnectingFlight: item.haveConnectingFlight,
+                connectingFlights:item.connectingFlights,
+                flightFares:item.flightFares,
+              }
+            })
+            dispatch(addToResponse(dataTosend));
           }
         });
       });

@@ -12,6 +12,7 @@ function classNames(...classes: string[]) {
 }
 
 interface Airline {
+  value: string;
   name: string;
 }
 
@@ -26,23 +27,33 @@ const quickestFlights = [
 ];
 
 const stopsList = [
-  {name: 'Any number of stops'},
-  {name: 'Non-stop only'},
-  {name: '1 stop or fewer'},
-  {name: '2 stop or fewer'}
+  {name: 'Any number of stops', value: 'Any number of stops'},
+  {name: 'Non-stop only', value: 0},
+  {name: '1 stop or fewer', value: 1},
+  {name: '2 stop or fewer', value: 2}
 ];
 
 const airlines: Airline[] = [
-  {name: 'Aer Lingus'},
-  {name: 'Air Canada'},
-  {name: 'Air France'},
-  {name: 'American Airlines'},
-  {name: 'American Airlines 2'},
-  {name: 'American Airlines 3'},
-  {name: 'American Airlines 3'},
-  {name: 'American Airlines 4'},
-  {name: 'American Airlines 5'},
-  {name: 'American Airlines 6'}
+  {value: 'aa', name: 'American Air'},
+  {value: 'etihadGuest', name: 'Etihad Airways'},
+  {value: 'virginAustralia', name: 'Virgin Australia'},
+  {value: 'southwest', name: 'Southwest Airlines'},
+  {value: 'virginAtlantic', name: 'Virgin Atlantic'},
+  {value: 'jetBlue', name: 'JetBlue'},
+  {value: 'alaska', name: 'Alaska Air'},
+  {value: 'airCanada', name: 'Air Canada'},
+  {value: 'delta', name: 'Delta Air Lines'},
+  {value: 'united', name: 'United Airlines'},
+  {value: 'asiana', name: 'Asiana Airlines'},
+  {value: 'qantas', name: 'Qantas Airline'},
+  {value: 'korean', name: 'Korean Air'},
+  {value: 'lifemiles', name: 'LifeMiles Airline'},
+  {value: 'aeromexico', name: 'Aeroméxico Airline'},
+  {value: 'emirates', name: 'Emirates Airline'},
+  {value: 'asiaMiles', name: 'Asia Miles'},
+  {value: 'iberia', name: 'Iberia Airline'},
+  {value: 'british', name: 'British Airways'},
+  {value: 'hawaiian', name: 'Hawaiian Airlines'}
 ];
 
 const cardPrograms: CardPrograms[] = [
@@ -54,9 +65,28 @@ const cardPrograms: CardPrograms[] = [
   {name: 'Citi ThankYou'}
 ];
 
-const FilterCard = () => {
-  const [allAirlines, setAllAirlines] = useState(false);
+const FilterCard = ({
+  selectedFlights,
+  setSelectedFlights,
+  selectedStops,
+  setSelectedStops,
+  arrivalFilter,
+  setArrivalFilter,
+  deptFilter,
+  setDeptFilter
+}) => {
   const [allPrograms, setAllPrograms] = useState(false);
+
+  const handleFlightsFilterChange = (e, airline) => {
+    let updatedData = [...selectedFlights];
+
+    if (e.target.checked) {
+      updatedData.push(airline.name);
+    } else {
+      updatedData = updatedData.filter(item => item !== airline.name);
+    }
+    setSelectedFlights(updatedData);
+  };
 
   return (
     <>
@@ -89,17 +119,27 @@ const FilterCard = () => {
                   <div className="md:min-w-[19rem] max-w-[19rem]">
                     <Switch.Group as="div" className="flex items-center mb-6">
                       <Switch
-                        checked={allAirlines}
-                        onChange={setAllAirlines}
+                        checked={airlines.length === selectedFlights.length}
+                        onChange={name => {
+                          if (name) {
+                            setSelectedFlights(airlines.map(item => item.name));
+                          } else {
+                            setSelectedFlights([]);
+                          }
+                        }}
                         className={classNames(
-                          allAirlines ? 'bg-primary-500' : 'bg-gray-200',
+                          airlines.length === selectedFlights.length
+                            ? 'bg-primary-500'
+                            : 'bg-gray-200',
                           'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2'
                         )}
                       >
                         <span
                           aria-hidden="true"
                           className={classNames(
-                            allAirlines ? 'translate-x-5' : 'translate-x-0',
+                            airlines.length === selectedFlights.length
+                              ? 'translate-x-5'
+                              : 'translate-x-0',
                             'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out'
                           )}
                         />
@@ -125,6 +165,10 @@ const FilterCard = () => {
                               name={airline.name}
                               type="checkbox"
                               className="h-5 w-5 rounded-sm border-gray-300"
+                              checked={selectedFlights.includes(airline.name)}
+                              onChange={e =>
+                                handleFlightsFilterChange(e, airline)
+                              }
                             />
                           </div>
                           <div className="ml-3 text-sm leading-6">
@@ -141,12 +185,25 @@ const FilterCard = () => {
                     </ul>
                   </div>
                 </Dropdown>
-                <CustomSelect list={stopsList} placeholder="Stops" />
+
+                <CustomSelect
+                  list={stopsList}
+                  placeholder="Stops"
+                  selected={selectedStops}
+                  setSelected={setSelectedStops}
+                />
+
                 <Dropdown title="Times">
                   <div className="md:min-w-[19rem] max-w-[19rem]">
-                    <TimeSlider />
+                    <TimeSlider
+                      arrivalFilter={arrivalFilter}
+                      setArrivalFilter={setArrivalFilter}
+                      deptFilter={deptFilter}
+                      setDeptFilter={setDeptFilter}
+                    />
                   </div>
                 </Dropdown>
+
                 <Dropdown title="Programs">
                   <div className="md:min-w-[19rem] max-w-[19rem]">
                     <Switch.Group as="div" className="flex items-center mb-4">
@@ -289,7 +346,6 @@ const FilterCard = () => {
           </div>
         </div>
       </div>
-      <h6 className="font-bold">153 flights</h6>
     </>
   );
 };

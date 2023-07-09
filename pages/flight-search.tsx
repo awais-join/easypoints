@@ -6,7 +6,6 @@ import {metaConstants} from '@/meta-constants';
 import Container from '@/components/views/Container';
 import FlightSearch from '@/components/inputs/FlightSearch';
 import BookCard from '@/components/cards/BookCard';
-import FilterCard from '@/components/cards/FilterCard';
 import BookingOptions from '@/components/modal/BookingOptions';
 import {useAppDispatch} from '@/store/hooks';
 import {API} from '@/utils/axios.service';
@@ -35,9 +34,6 @@ const FlightSearchPage: NextPage<FlightSearchProps> = () => {
       <section className="pb-8 md:pb-12 pt-8 lg:pt-36">
         <Container>
           <div className="max-w-7xl mx-auto">
-            {/* filter section */}
-            <FilterCard />
-            {/* /filter section */}
             {/* books cards */}
             <ul className="space-y-4 mt-8">
               <li>

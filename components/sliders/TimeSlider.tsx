@@ -1,7 +1,22 @@
 import React from 'react';
 import Slider from 'rc-slider';
 
-const TimeSlider = () => {
+const TimeSlider = ({
+  arrivalFilter,
+  setArrivalFilter,
+  deptFilter,
+  setDeptFilter
+}) => {
+  const getTimeForSlider = (number: number) => {
+    const hours = Math.floor((number - 1) / 2);
+    const minutes = number % 2 === 0 ? '30' : '00';
+    const period = hours < 12 ? 'AM' : 'PM';
+    const formattedHours =
+      hours === 0 || hours === 12 ? '12' : (hours % 12).toString();
+
+    return `${formattedHours}:${minutes} ${period}`;
+  };
+
   return (
     <ul className="space-y-4">
       <li>
@@ -9,14 +24,16 @@ const TimeSlider = () => {
           Arrival: (CDG)
         </h6>
         <h6 className="text-sm font-normal text-black50 mb-3">
-          12:00am - 9:00pm
+          {getTimeForSlider(arrivalFilter[0])} -{' '}
+          {getTimeForSlider(arrivalFilter[1])}
         </h6>
         <Slider
           range={true}
           className="w-full"
-          min={0}
-          max={24}
-          defaultValue={[0, 24]}
+          min={1}
+          max={48}
+          value={arrivalFilter}
+          onChange={value => setArrivalFilter(value)}
         />
       </li>
       <li>
@@ -24,14 +41,15 @@ const TimeSlider = () => {
           Departure: (JFK)
         </h6>
         <h6 className="text-sm font-normal text-black50 mb-3">
-          1:00am - 10:00pm
+          {getTimeForSlider(deptFilter[0])} - {getTimeForSlider(deptFilter[1])}
         </h6>
         <Slider
           range={true}
           className="w-full"
-          min={0}
-          max={24}
-          defaultValue={[0, 24]}
+          min={1}
+          max={48}
+          value={deptFilter}
+          onChange={value => setDeptFilter(value)}
         />
       </li>
     </ul>
