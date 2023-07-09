@@ -38,7 +38,7 @@ const BookCard = () => {
   });
 
   const [open, setOpen] = useState(false);
-  const [selectedFlights, setSelectedFlights] = useState<string[]>(['']);
+  const [selectedFlights, setSelectedFlights] = useState<string[]>([]);
   const [selectedStops, setSelectedStops] = useState<{
     value: string;
     name: string;
@@ -59,19 +59,17 @@ const BookCard = () => {
   }, [selectedFlights, selectedStops, arrivalFilter, deptFilter]);
 
   const handleFilter = () => {
-    let filteredData = allFlights;
+    let filteredData = [...allFlights];
     if (selectedFlights.length) {
-      filteredData = allFlights?.filter(flight => {
-        if (
-          flight.airlineName &&
-          selectedFlights.includes(flight.airlineName)
-        ) {
-          return flight;
-        }
-      });
+      filteredData = allFlights?.filter(flight =>
+        selectedFlights.includes(flight.airlineName)
+      );
     }
 
-    if (selectedStops?.value !== 'Any number of stops') {
+    if (
+      selectedStops?.value &&
+      selectedStops?.value !== 'Any number of stops'
+    ) {
       filteredData = filteredData?.filter(
         flight =>
           flight.haveConnectingFlight &&
@@ -80,9 +78,6 @@ const BookCard = () => {
     }
     setFlightsData(filteredData);
   };
-
-  console.log('allFlights', allFlights);
-  console.log('flightsData', flightsData);
 
   return (
     <>

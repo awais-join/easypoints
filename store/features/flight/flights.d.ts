@@ -31,7 +31,7 @@ export interface UnifiedFlightFare {
 
 export interface UnifiedFlightResponse {
   imageUrl?: string;
-  airlineName?: string;
+  airlineName: string;
   departure: string;
   arrivalTime: string;
   duration: number;
