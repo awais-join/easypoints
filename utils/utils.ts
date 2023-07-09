@@ -38,3 +38,20 @@ export const getTimeForSlider = (number: number) => {
 
   return `${formattedHours}:${minutes} ${period}`;
 };
+
+export const isTimeInRange =(time: string, startTime: string, endTime: string): boolean => {
+  const currentTime = parseInt(time.replace(':', ''), 10);
+  const start = parseInt(startTime.replace(':', ''), 10);
+  const end = parseInt(endTime.replace(':', ''), 10);
+
+
+  return currentTime >= start && currentTime <= end;
+}
+
+export const convertNumberToTime =(number: number): string =>{
+
+  const hour = Math.floor((number - 1) / 2);
+  const minute = (number % 2) === 0 ? '30' : '00';
+
+  return `${hour.toString().padStart(2, '0')}:${minute}`;
+}

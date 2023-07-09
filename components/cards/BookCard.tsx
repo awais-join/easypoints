@@ -10,7 +10,13 @@ import {useAppSelector} from '@/store/hooks';
 import {getAllResponse} from '@/store/features/flight/flight.feature';
 import FilterCard from './FilterCard';
 import getConfig from 'next/config';
-import {toHoursAndMinutes, toAMPMTime, dateToDayAndMonth} from 'utils/utils';
+import {
+  toHoursAndMinutes,
+  toAMPMTime,
+  dateToDayAndMonth,
+  convertNumberToTime,
+  isTimeInRange
+} from 'utils/utils';
 import {Airport, UnifiedFlightResponse} from '@/store/features/flight/flights';
 
 const config = getConfig();
@@ -59,12 +65,15 @@ const BookCard = () => {
 
   const handleFilter = () => {
     let filteredData = [...allFlights];
+
+    // filter by fligh name
     if (selectedFlights.length) {
       filteredData = allFlights?.filter(flight =>
         selectedFlights.includes(flight.airlineName)
       );
     }
 
+    // filtere by stop
     if (
       selectedStops?.value &&
       selectedStops?.value !== 'Any number of stops'
@@ -75,6 +84,22 @@ const BookCard = () => {
           flight.connectingFlights.length <= Number(selectedStops?.value) + 1
       );
     }
+
+    // filter by time range
+    filteredData = filteredData?.filter(
+      flight =>
+        isTimeInRange(
+          flight.arrivalTime.substring(11, 16),
+          convertNumberToTime(arrivalFilter[0]),
+          convertNumberToTime(arrivalFilter[1])
+        ) &&
+        isTimeInRange(
+          flight.departure.substring(11, 16),
+          convertNumberToTime(deptFilter[0]),
+          convertNumberToTime(deptFilter[1])
+        )
+    );
+
     setFlightsData(filteredData);
   };
 
