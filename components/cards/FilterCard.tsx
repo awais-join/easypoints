@@ -11,7 +11,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-interface Airline {
+interface ListItem {
   value: string;
   name: string;
 }
@@ -19,21 +19,39 @@ interface Airline {
 interface CardPrograms {
   name: string;
 }
+interface FilterCardProps {
+  selectedFlights: string[];
+  setSelectedFlights: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedStops: {
+    value: string;
+    name: string;
+  } | null;
+  setSelectedStops: React.Dispatch<
+    React.SetStateAction<{
+      value: string;
+      name: string;
+    } | null>
+  >;
+  arrivalFilter: [number, number];
+  setArrivalFilter: React.Dispatch<React.SetStateAction<[number, number]>>;
+  deptFilter: [number, number];
+  setDeptFilter: React.Dispatch<React.SetStateAction<[number, number]>>;
+}
 
-const quickestFlights = [
+const quickestFlights: ListItem[] = [
   {name: 'Quickest Flights', value: 'quickest-flights'},
   {name: 'Points Low to High', value: 'points-low-to-high'},
   {name: 'Easypoints picks', value: 'easypoints-picks'}
 ];
 
-const stopsList = [
+const stopsList: ListItem[] = [
   {name: 'Any number of stops', value: 'Any number of stops'},
-  {name: 'Non-stop only', value: 0},
-  {name: '1 stop or fewer', value: 1},
-  {name: '2 stop or fewer', value: 2}
+  {name: 'Non-stop only', value: '0'},
+  {name: '1 stop or fewer', value: '1'},
+  {name: '2 stop or fewer', value: '2'}
 ];
 
-const airlines: Airline[] = [
+const airlines: ListItem[] = [
   {value: 'aa', name: 'American Air'},
   {value: 'etihadGuest', name: 'Etihad Airways'},
   {value: 'virginAustralia', name: 'Virgin Australia'},
@@ -65,7 +83,7 @@ const cardPrograms: CardPrograms[] = [
   {name: 'Citi ThankYou'}
 ];
 
-const FilterCard = ({
+const FilterCard: React.FC<FilterCardProps> = ({
   selectedFlights,
   setSelectedFlights,
   selectedStops,
@@ -77,7 +95,10 @@ const FilterCard = ({
 }) => {
   const [allPrograms, setAllPrograms] = useState(false);
 
-  const handleFlightsFilterChange = (e, airline) => {
+  const handleFlightsFilterChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    airline: ListItem
+  ) => {
     let updatedData = [...selectedFlights];
 
     if (e.target.checked) {
@@ -124,7 +145,7 @@ const FilterCard = ({
                           if (name) {
                             setSelectedFlights(airlines.map(item => item.name));
                           } else {
-                            setSelectedFlights([]);
+                            setSelectedFlights(['']);
                           }
                         }}
                         className={classNames(
@@ -188,7 +209,7 @@ const FilterCard = ({
 
                 <CustomSelect
                   list={stopsList}
-                  placeholder="Stops"
+                  placeholder={'Stops'}
                   selected={selectedStops}
                   setSelected={setSelectedStops}
                 />
@@ -340,7 +361,7 @@ const FilterCard = ({
                 Sort:
               </h6>
               <div className="flex items-center gap-4">
-                <CustomSelect list={quickestFlights} />
+                {/* <CustomSelect list={quickestFlights} /> */}
               </div>
             </div>
           </div>

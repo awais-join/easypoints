@@ -1,4 +1,4 @@
-import {Fragment, useState,useEffect,Dispatch} from 'react';
+import {Fragment, useEffect, Dispatch, SetStateAction, useState} from 'react';
 import {Listbox, Transition} from '@headlessui/react';
 import {ChevronDownIcon} from '@heroicons/react/20/solid';
 
@@ -14,19 +14,31 @@ interface ListItem {
 interface CustomSelectProps {
   list: ListItem[];
   placeholder?: string;
-  selected: ListItem;
-  setSelected:Dispatch<SetStateAction<ListItem>>
+  selected: {
+    value: string;
+    name: string;
+  } | null;
+  setSelected: Dispatch<
+    SetStateAction<{
+      value: string;
+      name: string;
+    } | null>
+  >;
 }
 
-export default function CustomSelect({list, placeholder , selected, setSelected}: CustomSelectProps) {
+export default function CustomSelect({
+  list,
+  placeholder,
+  selected,
+  setSelected
+}: CustomSelectProps) {
   // const [selected, setSelected] = useState<ListItem | null>(
   //   placeholder ? null : list[0]
   // );
 
-  useEffect(() => {
-    //setSelected(placeholder ? null : list[0])
-  }, [selected])
-  
+  // useEffect(() => {
+  //   setSelected(placeholder[0] ? null : list[0]);
+  // }, [selected]);
 
   return (
     <Listbox value={selected} onChange={setSelected}>
@@ -39,7 +51,11 @@ export default function CustomSelect({list, placeholder , selected, setSelected}
               }`}
             >
               <span className="block truncate text-base">
-                {selected ? selected.name : placeholder}
+                {selected?.name
+                  ? selected.name
+                  : placeholder
+                  ? placeholder
+                  : ''}
               </span>
               <span className="pointer-events-none flex items-center">
                 <ChevronDownIcon
@@ -68,8 +84,9 @@ export default function CustomSelect({list, placeholder , selected, setSelected}
                           ? 'bg-primary-500/10 border-primary-500 text-black'
                           : 'text-black border-transparent',
                         'relative cursor-default select-none p-2 rounded-lg border-2',
-                        selected ?
-                          'bg-primary-500/10 border-primary-500 text-black' : ''
+                        selected
+                          ? 'bg-primary-500/10 border-primary-500 text-black'
+                          : ''
                       )
                     }
                     value={item}

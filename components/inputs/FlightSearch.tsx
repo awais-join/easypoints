@@ -11,7 +11,7 @@ import {
   addToResponse,
   getAirports
 } from '@/store/features/flight/flight.feature';
-import {Airport, Response} from '@/store/features/flight/flights';
+import {Airport, ListItem, Response} from '@/store/features/flight/flights';
 import Fuse from 'fuse.js';
 import {Autocomplete} from '@mui/material';
 import {
@@ -20,12 +20,14 @@ import {
 } from '@/components/inputs/autocomplete.component';
 import {API} from '@/utils/axios.service';
 
-const flightType = [{name: 'One Way', value: 'one-way'}];
+const flightTypeList: ListItem[] = [{name: 'One Way', value: 'one-way'}];
 
-const flightClass = [{name: '1 Adult, Economy', value: 'one-adult-economy'}];
+const flightClassList: ListItem[] = [
+  {name: '1 Adult, Economy', value: 'one-adult-economy'}
+];
 
 const airlinesCodes = [
-  {value: 'aa', name: 'American Air'},
+  {value: 'aa', name: 'American Air'}
   // {value: 'etihadGuest', name: 'Etihad Airways'},
   // {value: 'virginAustralia', name: 'Virgin Australia'},
   // {value: 'southwest', name: 'Southwest Airlines'},
@@ -54,6 +56,20 @@ const FlightPriceSection = () => {
   const {pathname} = useRouter();
 
   const [isSwitched, setIsSwitched] = useState(false);
+  const [flightType, setFlightType] = useState<{
+    value: string;
+    name: string;
+  } | null>({
+    name: 'One Way',
+    value: 'one-way'
+  });
+  const [flightClass, setFlightClass] = useState<{
+    value: string;
+    name: string;
+  } | null>({
+    name: '1 Adult, Economy',
+    value: 'one-adult-economy'
+  });
   const [searchValues, setSearchValues] = useState<{
     from: Airport | null;
     to: Airport | null;
@@ -87,10 +103,13 @@ const FlightPriceSection = () => {
 
   const search = () => {
     airlinesCodes
-      .map( airline => {
-        return { promiseResult: API.get(
-          `results/${airline.value}?origin=${searchValues.from?.airportCode}&destination=${searchValues.to?.airportCode}&departureDate=${searchValues.departureDate}`
-        ), metaData: airline}
+      .map(airline => {
+        return {
+          promiseResult: API.get(
+            `results/${airline.value}?origin=${searchValues.from?.airportCode}&destination=${searchValues.to?.airportCode}&departureDate=${searchValues.departureDate}`
+          ),
+          metaData: airline
+        };
       })
       .forEach(promise => {
         promise.promiseResult.then((response: Response) => {
@@ -108,10 +127,10 @@ const FlightPriceSection = () => {
                 operatedBy: item.operatedBy,
                 aircraft: item.aircraft,
                 haveConnectingFlight: item.haveConnectingFlight,
-                connectingFlights:item.connectingFlights,
-                flightFares:item.flightFares,
-              }
-            })
+                connectingFlights: item.connectingFlights,
+                flightFares: item.flightFares
+              };
+            });
             dispatch(addToResponse(dataTosend));
           }
         });
@@ -131,8 +150,16 @@ const FlightPriceSection = () => {
               )}
 
               <div className="flex flex-wrap gap-4">
-                <CustomSelect list={flightType} />
-                <CustomSelect list={flightClass} />
+                <CustomSelect
+                  list={flightTypeList}
+                  selected={flightType}
+                  setSelected={setFlightType}
+                />
+                <CustomSelect
+                  list={flightClassList}
+                  selected={flightClass}
+                  setSelected={setFlightClass}
+                />
               </div>
             </div>
             <form>

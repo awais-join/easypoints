@@ -11,6 +11,7 @@ import {getAllResponse} from '@/store/features/flight/flight.feature';
 import FilterCard from './FilterCard';
 import getConfig from 'next/config';
 import {toHoursAndMinutes, toAMPMTime, dateToDayAndMonth} from 'utils/utils';
+import {Airport, UnifiedFlightResponse} from '@/store/features/flight/flights';
 
 const config = getConfig();
 const DOMAIN_BASE_URL = config.publicRuntimeConfig.DOMAIN_BASE_URL || '';
@@ -18,14 +19,37 @@ const DOMAIN_BASE_URL = config.publicRuntimeConfig.DOMAIN_BASE_URL || '';
 const BookCard = () => {
   const allFlights = useAppSelector(getAllResponse);
 
-  const [flightsData, setFlightsData] = useState([]);
+  const [flightsData, setFlightsData] = useState<UnifiedFlightResponse[] | []>(
+    []
+  );
+
+  const [searchValues, setSearchValues] = useState<{
+    from: Airport | null;
+    to: Airport | null;
+    departureDate: string;
+    flightClass: string;
+    roundTrip: string;
+  }>({
+    from: null,
+    to: null,
+    departureDate: '',
+    flightClass: '',
+    roundTrip: ''
+  });
 
   const [open, setOpen] = useState(false);
-  const [selectedFlights, setSelectedFlights] = useState([]);
-  const [selectedStops, setSelectedStops] = useState({});
-  const [arrivalFilter, setArrivalFilter] = useState([1, 48]);
-  const [deptFilter, setDeptFilter] = useState([1, 48]);
+  const [selectedFlights, setSelectedFlights] = useState<string[]>(['']);
+  const [selectedStops, setSelectedStops] = useState<{
+    value: string;
+    name: string;
+  } | null>({
+    value: '',
+    name: ''
+  });
+  const [arrivalFilter, setArrivalFilter] = useState<[number, number]>([1, 48]);
+  const [deptFilter, setDeptFilter] = useState<[number, number]>([1, 48]);
 
+  console.log('selectedFlights', selectedFlights);
   useEffect(() => {
     if (allFlights) setFlightsData(allFlights);
   }, [allFlights]);
@@ -37,21 +61,28 @@ const BookCard = () => {
   const handleFilter = () => {
     let filteredData = allFlights;
     if (selectedFlights.length) {
-      filteredData = allFlights?.filter(flight =>
-        selectedFlights.includes(flight.airlineName)
-      );
+      filteredData = allFlights?.filter(flight => {
+        if (
+          flight.airlineName &&
+          selectedFlights.includes(flight.airlineName)
+        ) {
+          return flight;
+        }
+      });
     }
 
-    if (selectedStops.value !== 'Any number of stops') {
-      filteredData = allFlights?.filter(
+    if (selectedStops?.value !== 'Any number of stops') {
+      filteredData = filteredData?.filter(
         flight =>
           flight.haveConnectingFlight &&
-          flight.connectingFlights.length === selectedStops.value + 1
+          flight.connectingFlights.length === Number(selectedStops?.value) + 1
       );
     }
     setFlightsData(filteredData);
   };
 
+  console.log('allFlights', allFlights);
+  console.log('flightsData', flightsData);
 
   return (
     <>
@@ -76,7 +107,7 @@ const BookCard = () => {
         flightsData.map(flight => {
           return (
             <div
-              key={new Date()}
+              key={Math.random()}
               className="bg-white shadow-primaryLg border rounded-2xl sm:rounded-3xl p-4 sm:p-7 mt-2"
             >
               <div className="flex flex-col xl:flex-row xl:justify-between gap-4 2xl:gap-12">

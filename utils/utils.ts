@@ -28,3 +28,13 @@ export const dateToDayAndMonth = (timestamp: string)=> {
 return `${formattedDate.slice(0, 3)} ${formattedDate.slice(4)}${suffix}`;
 
 }
+
+export const getTimeForSlider = (number: number) => {
+  const hours = Math.floor((number - 1) / 2);
+  const minutes = number % 2 === 0 ? '30' : '00';
+  const period = hours < 12 ? 'AM' : 'PM';
+  const formattedHours =
+    hours === 0 || hours === 12 ? '12' : (hours % 12).toString();
+
+  return `${formattedHours}:${minutes} ${period}`;
+};

@@ -1,21 +1,21 @@
 import React from 'react';
 import Slider from 'rc-slider';
+import { getTimeForSlider } from '../../utils/utils';
 
-const TimeSlider = ({
+
+interface TimeSliderProps {
+  arrivalFilter: [number, number];
+  setArrivalFilter: React.Dispatch<React.SetStateAction<[number, number]>>;
+  deptFilter: [number, number];
+  setDeptFilter: React.Dispatch<React.SetStateAction<[number, number]>>;
+}
+
+const TimeSlider: React.FC<TimeSliderProps> = ({
   arrivalFilter,
   setArrivalFilter,
   deptFilter,
   setDeptFilter
 }) => {
-  const getTimeForSlider = (number: number) => {
-    const hours = Math.floor((number - 1) / 2);
-    const minutes = number % 2 === 0 ? '30' : '00';
-    const period = hours < 12 ? 'AM' : 'PM';
-    const formattedHours =
-      hours === 0 || hours === 12 ? '12' : (hours % 12).toString();
-
-    return `${formattedHours}:${minutes} ${period}`;
-  };
 
   return (
     <ul className="space-y-4">
@@ -33,7 +33,8 @@ const TimeSlider = ({
           min={1}
           max={48}
           value={arrivalFilter}
-          onChange={value => setArrivalFilter(value)}
+          onChange={(value: [number, number]) => setArrivalFilter(value)}
+
         />
       </li>
       <li>
@@ -49,7 +50,7 @@ const TimeSlider = ({
           min={1}
           max={48}
           value={deptFilter}
-          onChange={value => setDeptFilter(value)}
+          onChange={(value: [number, number]) => setDeptFilter(value)}
         />
       </li>
     </ul>

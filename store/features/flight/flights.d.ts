@@ -31,6 +31,7 @@ export interface UnifiedFlightFare {
 
 export interface UnifiedFlightResponse {
   imageUrl?: string;
+  airlineName?: string;
   departure: string;
   arrivalTime: string;
   duration: number;
@@ -63,4 +64,9 @@ export interface Airport {
 interface FlightResponse {
   responses: UnifiedFlightResponse[];
   airports: Airport[];
+}
+
+export interface ListItem {
+  name: string;
+  value: string;
 }
