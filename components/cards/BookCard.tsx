@@ -49,7 +49,6 @@ const BookCard = () => {
   const [arrivalFilter, setArrivalFilter] = useState<[number, number]>([1, 48]);
   const [deptFilter, setDeptFilter] = useState<[number, number]>([1, 48]);
 
-  console.log('selectedFlights', selectedFlights);
   useEffect(() => {
     if (allFlights) setFlightsData(allFlights);
   }, [allFlights]);
@@ -73,7 +72,7 @@ const BookCard = () => {
       filteredData = filteredData?.filter(
         flight =>
           flight.haveConnectingFlight &&
-          flight.connectingFlights.length === Number(selectedStops?.value) + 1
+          flight.connectingFlights.length <= Number(selectedStops?.value) + 1
       );
     }
     setFlightsData(filteredData);
