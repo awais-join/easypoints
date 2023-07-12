@@ -4,10 +4,10 @@ import { getTimeForSlider } from '../../utils/utils';
 
 
 interface TimeSliderProps {
-  arrivalFilter: [number, number];
-  setArrivalFilter: React.Dispatch<React.SetStateAction<[number, number]>>;
-  deptFilter: [number, number];
-  setDeptFilter: React.Dispatch<React.SetStateAction<[number, number]>>;
+  arrivalFilter: number[];
+  setArrivalFilter: React.Dispatch<React.SetStateAction<number[]>>;
+  deptFilter: number[];
+  setDeptFilter: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
 const TimeSlider: React.FC<TimeSliderProps> = ({
@@ -33,8 +33,9 @@ const TimeSlider: React.FC<TimeSliderProps> = ({
           min={1}
           max={48}
           value={arrivalFilter}
-          onChange={(value: [number, number]) => setArrivalFilter(value)}
-
+          onChange={(value: number[] | number) => {
+            setArrivalFilter(value as number[]);
+          }}
         />
       </li>
       <li>
@@ -50,7 +51,9 @@ const TimeSlider: React.FC<TimeSliderProps> = ({
           min={1}
           max={48}
           value={deptFilter}
-          onChange={(value: [number, number]) => setDeptFilter(value)}
+          onChange={(value: number[] | number) => {
+            setDeptFilter(value as number[]);
+          }}
         />
       </li>
     </ul>

@@ -33,10 +33,10 @@ interface FilterCardProps {
       name: string;
     } | null>
   >;
-  arrivalFilter: [number, number];
-  setArrivalFilter: React.Dispatch<React.SetStateAction<[number, number]>>;
-  deptFilter: [number, number];
-  setDeptFilter: React.Dispatch<React.SetStateAction<[number, number]>>;
+  arrivalFilter: number[];
+  setArrivalFilter: React.Dispatch<React.SetStateAction<number[]>>;
+  deptFilter: number[];
+  setDeptFilter: React.Dispatch<React.SetStateAction<number[]>>;
   searchValue: SearchValue;
 }
 

@@ -29,6 +29,8 @@ export const OuterElementType = React.forwardRef<HTMLDivElement>((props, ref) =>
   return <div ref={ref} {...props} {...outerProps} />;
 });
 
+OuterElementType.displayName = 'OuterElementType';
+
 export function useResetCache(data: any) {
   const ref = React.useRef<VariableSizeList>(null);
   React.useEffect(() => {
@@ -96,6 +98,8 @@ export const ListboxComponent = React.forwardRef<
     </div>
   );
 });
+
+ListboxComponent.displayName = 'ListboxComponent';
 
 export const StyledPopper = styled(Popper)({
   [`& .${autocompleteClasses.listbox}`]: {
