@@ -52,8 +52,8 @@ const BookCard = () => {
     value: '',
     name: ''
   });
-  const [arrivalFilter, setArrivalFilter] = useState<[number, number]>([1, 48]);
-  const [deptFilter, setDeptFilter] = useState<[number, number]>([1, 48]);
+  const [arrivalFilter, setArrivalFilter] = useState<number[]>([1, 48]);
+  const [deptFilter, setDeptFilter] = useState<number[]>([1, 48]);
 
   useEffect(() => {
     if (allFlights) setFlightsData(allFlights);
