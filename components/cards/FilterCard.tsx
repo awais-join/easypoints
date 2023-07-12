@@ -6,6 +6,7 @@ import TimeSlider from '../sliders/TimeSlider';
 
 import {ArrowRightIcon} from '@heroicons/react/24/solid';
 import {InformationCircleIcon} from '@heroicons/react/24/outline';
+import {SearchValue} from '@/store/features/flight/flights';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -36,6 +37,7 @@ interface FilterCardProps {
   setArrivalFilter: React.Dispatch<React.SetStateAction<[number, number]>>;
   deptFilter: [number, number];
   setDeptFilter: React.Dispatch<React.SetStateAction<[number, number]>>;
+  searchValue: SearchValue;
 }
 
 const quickestFlights: ListItem[] = [
@@ -91,7 +93,8 @@ const FilterCard: React.FC<FilterCardProps> = ({
   arrivalFilter,
   setArrivalFilter,
   deptFilter,
-  setDeptFilter
+  setDeptFilter,
+  searchValue
 }) => {
   const [allPrograms, setAllPrograms] = useState(false);
 
@@ -115,9 +118,15 @@ const FilterCard: React.FC<FilterCardProps> = ({
         <h5 className="text-lg font-bold flex flex-col sm:flex-row gap-2 sm:items-center mb-4">
           <span>Quickest Flights:</span>
           <span className="flex items-center gap-2 line-clamp-1">
-            New York (JFK)
+            {searchValue?.from?.city}{' '}
+            {searchValue?.from?.airportCode
+              ? `(${searchValue.from.airportCode})`
+              : ''}
             <ArrowRightIcon className="inline-block h-5 w-5" />
-            London (LHR)
+            {searchValue?.to?.city}{' '}
+            {searchValue?.to?.airportCode
+              ? `(${searchValue.to.airportCode})`
+              : ''}
           </span>
         </h5>
         <h6 className="font-bold text-xs md:text-sm text-gray-500 mb-1">

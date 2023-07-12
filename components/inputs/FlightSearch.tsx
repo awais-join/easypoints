@@ -18,7 +18,10 @@ import {
   ListboxComponent,
   StyledPopper
 } from '@/components/inputs/autocomplete.component';
+import BookCard from '@/components/cards/BookCard';
+import BookingOptions from '@/components/modal/BookingOptions';
 import {API} from '@/utils/axios.service';
+import { SearchValue } from '@/store/features/flight/flights';
 
 const flightTypeList: ListItem[] = [{name: 'One Way', value: 'one-way'}];
 
@@ -70,13 +73,7 @@ const FlightPriceSection = () => {
     name: '1 Adult, Economy',
     value: 'one-adult-economy'
   });
-  const [searchValues, setSearchValues] = useState<{
-    from: Airport | null;
-    to: Airport | null;
-    departureDate: string;
-    flightClass: string;
-    roundTrip: string;
-  }>({
+  const [searchValues, setSearchValues] = useState<SearchValue>({
     from: null,
     to: null,
     departureDate: '',
@@ -138,6 +135,8 @@ const FlightPriceSection = () => {
   };
 
   return (
+    <>
+    <div className="bg-light rounded-b-3xl mx-3">
     <section className="pb-8 lg:pb-0 pt-6 md:pt-12">
       <Container>
         <div className="bg-white rounded-4xl p-4 lg:p-6 lg:-mt-28 lg:translate-y-28">
@@ -167,49 +166,6 @@ const FlightPriceSection = () => {
                 <div
                   className={`border border-lightGray rounded-3xl lg:rounded-full px-4 py-2 flex flex-col lg:flex-row gap-4 lg:gap-0 ${styles.mainContainer}`}
                 >
-                  <Autocomplete
-                    onChange={(_, value) => {
-                      setSearchValues({...searchValues, to: value});
-                    }}
-                    value={searchValues.to}
-                    sx={{width: 300}}
-                    PopperComponent={StyledPopper}
-                    ListboxComponent={ListboxComponent}
-                    options={airports}
-                    renderInput={params => {
-                      return (
-                        <div
-                          className={`flex items-center flex-1 ${
-                            isSwitched ? 'order-first' : 'order-last'
-                          }`}
-                          ref={params.InputProps.ref}
-                        >
-                          <span className="h-8 w-8 min-w-[2rem] relative block mr-2">
-                            <Image fill src="/assets/flight-to.svg" alt="..." />
-                          </span>
-                          <input
-                            {...params.inputProps}
-                            className="w-full text-lg border-0 focus:ring-0 bg-transparent placeholder:text-black50"
-                            placeholder="Where to?"
-                            type="text"
-                            name="to"
-                          />
-                        </div>
-                      );
-                    }}
-                    getOptionLabel={e => e.airportName}
-                  />
-                  <div className="border-t lg:border-l border-lightGray relative mx-8">
-                    <button
-                      type="button"
-                      className="swap-button absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 active:scale-105"
-                      onClick={() => setIsSwitched(!isSwitched)}
-                    >
-                      <span className="h-7 w-7 relative block">
-                        <Image fill src="/assets/swap-icon.svg" alt="..." />
-                      </span>
-                    </button>
-                  </div>
                   <Autocomplete
                     value={searchValues.from}
                     onChange={(_, value) => {
@@ -241,6 +197,50 @@ const FlightPriceSection = () => {
                             placeholder="Where from?"
                             type="text"
                             name="from"
+                          />
+                        </div>
+                      );
+                    }}
+                    getOptionLabel={e => e.airportName}
+                  />
+                  <div className="border-t lg:border-l border-lightGray relative mx-8">
+                    <button
+                      type="button"
+                      className="swap-button absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 active:scale-105"
+                      onClick={() => setIsSwitched(!isSwitched)}
+                    >
+                      <span className="h-7 w-7 relative block">
+                        <Image fill src="/assets/swap-icon.svg" alt="..." />
+                      </span>
+                    </button>
+                  </div>
+
+                  <Autocomplete
+                    onChange={(_, value) => {
+                      setSearchValues({...searchValues, to: value});
+                    }}
+                    value={searchValues.to}
+                    sx={{width: 300}}
+                    PopperComponent={StyledPopper}
+                    ListboxComponent={ListboxComponent}
+                    options={airports}
+                    renderInput={params => {
+                      return (
+                        <div
+                          className={`flex items-center flex-1 ${
+                            isSwitched ? 'order-first' : 'order-last'
+                          }`}
+                          ref={params.InputProps.ref}
+                        >
+                          <span className="h-8 w-8 min-w-[2rem] relative block mr-2">
+                            <Image fill src="/assets/flight-to.svg" alt="..." />
+                          </span>
+                          <input
+                            {...params.inputProps}
+                            className="w-full text-lg border-0 focus:ring-0 bg-transparent placeholder:text-black50"
+                            placeholder="Where to?"
+                            type="text"
+                            name="to"
                           />
                         </div>
                       );
@@ -290,6 +290,22 @@ const FlightPriceSection = () => {
         </div>
       </Container>
     </section>
+    </div>
+     <section className="pb-8 md:pb-12 pt-8 lg:pt-36">
+     <Container>
+       <div className="max-w-7xl mx-auto">
+         {/* books cards */}
+         <ul className="space-y-4 mt-8">
+           <li>
+             <BookCard searchValue={searchValues} />
+           </li>
+         </ul>
+         {/* /books cards */}
+       </div>
+     </Container>
+     <BookingOptions />
+   </section>
+   </>
   );
 };
 

@@ -70,3 +70,11 @@ export interface ListItem {
   name: string;
   value: string;
 }
+
+export interface SearchValue {
+  from: Airport | null;
+  to: Airport | null;
+  departureDate: string;
+  flightClass: string;
+  roundTrip: string;
+}
