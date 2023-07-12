@@ -1,27 +1,16 @@
-import React, {useState, useEffect, FC} from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import {Transition} from '@headlessui/react';
-
-import {InformationCircleIcon} from '@heroicons/react/24/outline';
-import {ChevronDownIcon} from '@heroicons/react/24/solid';
-import ArrowTwoIcon from '../icons/ArrowTwoIcon';
+import React, {useState, useEffect} from 'react';
 import {useAppSelector} from '@/store/hooks';
 import {getAllResponse} from '@/store/features/flight/flight.feature';
 import FilterCard from './FilterCard';
 import getConfig from 'next/config';
 import {
-  toHoursAndMinutes,
-  toAMPMTime,
-  dateToDayAndMonth,
   convertNumberToTime,
   isTimeInRange
 } from 'utils/utils';
-import {Airport, UnifiedFlightResponse, SearchValue} from '@/store/features/flight/flights';
+import { UnifiedFlightResponse, SearchValue} from '@/store/features/flight/flights';
 import FlightDetailExtension from '../FlightDetailExtension'
 
 const config = getConfig();
-const DOMAIN_BASE_URL = config.publicRuntimeConfig.DOMAIN_BASE_URL || '';
 
 interface BookCardProps {
   searchValue : SearchValue
@@ -115,7 +104,7 @@ const BookCard: React.FC<BookCardProps> = ({searchValue}) => {
 
       {flightsData?.length ? (
         flightsData.map(flight => (
-          <FlightDetailExtension flight={flight} />
+          <FlightDetailExtension key={Math.random()} flight={flight} />
         ))
       ) : (
         <h4 className="font-bold mt-10 flex items-center justify-center">

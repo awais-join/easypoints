@@ -16,7 +16,6 @@ const FlightDetailExtension: React.FC<{flight: UnifiedFlightResponse}> = ({
 
   return (
     <div
-      key={Math.random()}
       className="bg-white shadow-primaryLg border rounded-2xl sm:rounded-3xl p-4 sm:p-7 mt-2"
     >
       <div className="flex flex-col xl:flex-row xl:justify-between gap-4 2xl:gap-12">
